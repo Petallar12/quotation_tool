@@ -20,7 +20,7 @@ const InputForm = () => {
         hs_deductible: "Nil",
         op: "Essential",
         op_co_ins: "Nil",
-        ma: "Essential",
+        ma: "N/A",
         dn: "Essential",
       },
     },
@@ -129,6 +129,37 @@ const InputForm = () => {
       .toFixed(2);
   };
 
+  const handleEmailSubmit = async () => {
+    try {
+      const emailPayload = {
+        email: "calvin@medishure.com", // Your email address to receive the data
+        plans: response.map((rate, index) => ({
+          client: `${clients[index].name} (${clients[index].gender}, ${clients[index].age})`,
+          hospitalSurgery: `Premium: USD ${rate.hs || "N/A"}`,
+          outpatient: `Premium: USD ${rate.op || "N/A"}`,
+          maternity: `Premium: USD ${rate.ma || "N/A"}`,
+          dental: `Premium: USD ${rate.dn || "N/A"}`,
+          subtotal: `USD ${
+            ["hs", "op", "ma", "dn"]
+              .map((key) =>
+                rate[key] !== undefined && rate[key] !== "N/A" ? rate[key] : 0
+              )
+              .reduce((sum, premium) => sum + premium, 0)
+              .toFixed(2)
+          }`,
+        })),
+        totalPremium: calculateTotalPremium(),
+      };
+  
+      const result = await axios.post('http://localhost:5000/send-email', emailPayload);
+      alert(result.data.message);
+    } catch (error) {
+      console.error('Error sending email:', error);
+      alert('Failed to send email.');
+    }
+  };
+  
+
   return (
     <div className="container my-4">
       <h1 className="text-center mb-2">
@@ -147,7 +178,7 @@ const InputForm = () => {
       </h4>
       <div className="row mb-3">
         <div className="col-md-4">
-          <label>Name:</label>
+          <label>Full Name:</label>
           <input
             type="text"
             className="form-control"
@@ -460,12 +491,18 @@ const InputForm = () => {
           </table>
         </div>
       )}
-            <p className="text-center mb-5">
+            <p className="text-center mt-5">
         By clicking on Submit Application you agree that your data may be used by Medishure to contact you by<br></br>phone or email your insurance application. Find more 
         information on the processing of your<br></br>data in our <span style={{ color: "Red" }}> Personal Data Policy</span>.
-        
       </p>
+      <div className="text-center">
+  <button className="btn btn-success ms-3" onClick={handleEmailSubmit}>
+    Submit Application
+  </button>
+</div>
+   
     </div>
+
   );
 };
 

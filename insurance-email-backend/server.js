@@ -1,0 +1,89 @@
+const express = require('express');
+const nodemailer = require('nodemailer');
+const cors = require('cors');
+const bodyParser = require('body-parser');
+
+const app = express();
+const PORT = 5000;
+
+// Middleware
+app.use(cors());
+app.use(bodyParser.json());
+
+
+
+const transporter = nodemailer.createTransport({
+    host: 'smtp.office365.com',
+    port: 587,
+    secure: false,
+    auth: {
+        user: 'smtp@medishure.com',
+        pass: 'dpqwrssjxlpgxyph',
+    },
+});
+
+transporter.verify((error, success) => {
+    if (error) {
+        console.error('Error:', error);
+    } else {
+        console.log('SMTP is working:', success);
+    }
+});
+
+
+// Email endpoint
+app.post('/send-email', async (req, res) => {
+  const { plans, totalPremium } = req.body;
+
+  try {
+    const emailContent = `
+      <h1>Plans and Premiums</h1>
+      <table border="1" cellpadding="10">
+        <thead>
+          <tr>
+            <th>Client</th>
+            <th>Hospital & Surgery</th>
+            <th>Outpatient</th>
+            <th>Maternity</th>
+            <th>Dental</th>
+            <th>Subtotal</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${plans
+            .map(
+              (plan) => `
+            <tr>
+              <td>${plan.client}</td>
+              <td>${plan.hospitalSurgery}</td>
+              <td>${plan.outpatient}</td>
+              <td>${plan.maternity}</td>
+              <td>${plan.dental}</td>
+              <td>${plan.subtotal}</td>
+            </tr>
+          `
+            )
+            .join('')}
+        </tbody>
+      </table>
+      <h2>Total Premium: USD ${totalPremium}</h2>
+    `;
+
+    await transporter.sendMail({
+        from: '"Datalokey" <smtp@medishure.com>', // Ensure this matches the SMTP user
+        to: 'calvin@medishure.com',              // Receiver's email
+        subject: 'Insurance Plans and Premiums', // Email subject
+        html: emailContent,                      // Dynamic email content
+      });
+
+    res.status(200).send({ message: 'Email sent successfully' });
+  } catch (error) {
+    console.error('Error sending email:', error);
+    res.status(500).send({ message: 'Error sending email', error });
+  }
+});
+
+// Start the server
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
+});
