@@ -32,42 +32,47 @@ transporter.verify((error, success) => {
 
 
 // Email endpoint
-app.post('/send-email', async (req, res) => {
-  const { plans, totalPremium } = req.body;
-
-  try {
-    const emailContent = `
-      <h1>Plans and Premiums</h1>
-      <table border="1" cellpadding="10">
-        <thead>
-          <tr>
-            <th>Client</th>
-            <th>Hospital & Surgery</th>
-            <th>Outpatient</th>
-            <th>Maternity</th>
-            <th>Dental</th>
-            <th>Subtotal</th>
-          </tr>
-        </thead>
-        <tbody>
-          ${plans
-            .map(
-              (plan) => `
+app.post("/send-email", async (req, res) => {
+    const { contactInfo, plans, totalPremium } = req.body;
+  
+    try {
+      const emailContent = `
+        <h1>Contact Information</h1>
+        <p><strong>Full Name:</strong> ${contactInfo.fullName}</p>
+        <p><strong>Contact Number:</strong> ${contactInfo.contactNumber}</p>
+        <p><strong>Email Address:</strong> ${contactInfo.emailAddress}</p>
+        <hr>
+        <h1>Plans and Premiums</h1>
+        <table border="1" cellpadding="10">
+          <thead>
             <tr>
-              <td>${plan.client}</td>
-              <td>${plan.hospitalSurgery}</td>
-              <td>${plan.outpatient}</td>
-              <td>${plan.maternity}</td>
-              <td>${plan.dental}</td>
-              <td>${plan.subtotal}</td>
+              <th>Client</th>
+              <th>Hospital & Surgery</th>
+              <th>Outpatient</th>
+              <th>Maternity</th>
+              <th>Dental</th>
+              <th>Subtotal</th>
             </tr>
-          `
-            )
-            .join('')}
-        </tbody>
-      </table>
-      <h2>Total Premium: USD ${totalPremium}</h2>
-    `;
+          </thead>
+          <tbody>
+            ${plans
+              .map(
+                (plan) => `
+                <tr>
+                  <td>${plan.client}</td>
+                  <td>${plan.hospitalSurgery}</td>
+                  <td>${plan.outpatient}</td>
+                  <td>${plan.maternity}</td>
+                  <td>${plan.dental}</td>
+                  <td>${plan.subtotal}</td>
+                </tr>
+              `
+              )
+              .join("")}
+          </tbody>
+        </table>
+        <h2>Total Premium: USD ${totalPremium}</h2>
+      `;
 
     await transporter.sendMail({
         from: '"Datalokey" <smtp@medishure.com>', // Ensure this matches the SMTP user

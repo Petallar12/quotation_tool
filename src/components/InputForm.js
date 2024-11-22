@@ -25,7 +25,11 @@ const InputForm = () => {
       },
     },
   ]);
-
+  const [contactInfo, setContactInfo] = useState({
+    fullName: "",
+    contactNumber: "",
+    emailAddress: "",
+  });
   const [response, setResponse] = useState([]);
 
   const handleClientChange = (index, e) => {
@@ -33,6 +37,11 @@ const InputForm = () => {
     const updatedClients = [...clients];
     updatedClients[index][name] = value;
     setClients(updatedClients);
+  };
+
+  const handleContactInfoChange = (e) => {
+    const { name, value } = e.target;
+    setContactInfo({ ...contactInfo, [name]: value });
   };
 
   const handlePlanChange = (index, type, value) => {
@@ -79,26 +88,27 @@ const InputForm = () => {
       const apiUrl =
         "https://mib-quotetool.com/quoting_api/api/quotations/get_rates";
 
-      const body = {
-        clients,
-        deductibles: clients.map((client) => client.plans.hs_deductible),
-        specifics: {
-          my_health_indonesia: clients.map((client) => ({
-            hs: { plan: client.plans.hs, deductible: client.plans.hs_deductible },
-            op: { plan: client.plans.op, co_ins: client.plans.op_co_ins },
-            ma: { plan: client.plans.ma },
-            dn: { plan: client.plans.dn },
-          })),
-        },
-        insurers: ["my_health_indonesia"],
-      };
-
-      const config = {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      };
+        const body = {
+          contactInfo, // Include contact information
+          clients,
+          deductibles: clients.map((client) => client.plans.hs_deductible),
+          specifics: {
+            my_health_indonesia: clients.map((client) => ({
+              hs: { plan: client.plans.hs, deductible: client.plans.hs_deductible },
+              op: { plan: client.plans.op, co_ins: client.plans.op_co_ins },
+              ma: { plan: client.plans.ma },
+              dn: { plan: client.plans.dn },
+            })),
+          },
+          insurers: ["my_health_indonesia"],
+        };
+  
+        const config = {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        };
 
       const result = await axios.post(apiUrl, body, config);
       setResponse(
@@ -131,8 +141,8 @@ const InputForm = () => {
 
   const handleEmailSubmit = async () => {
     try {
-      const emailPayload = {
-        email: "calvin@medishure.com", // Your email address to receive the data
+      const emailPayload = {contactInfo, 
+        // email: "calvin@medishure.com", // Your email address to receive the data
         plans: response.map((rate, index) => ({
           client: `${clients[index].name} (${clients[index].gender}, ${clients[index].age})`,
           hospitalSurgery: `Premium: USD ${rate.hs || "N/A"}`,
@@ -182,7 +192,9 @@ const InputForm = () => {
           <input
             type="text"
             className="form-control"
-            name="name_database"
+            name="fullName"
+            value={contactInfo.fullName}
+            onChange={handleContactInfoChange}
             required
           />
         </div>
@@ -191,16 +203,20 @@ const InputForm = () => {
           <input
             type="text"
             className="form-control"
-            name="contact_number"
+            name="contactNumber"
+            value={contactInfo.contactNumber}
+            onChange={handleContactInfoChange}
             required
           />
         </div>
         <div className="col-md-4">
           <label>Email Address:</label>
           <input
-            type="text"
+            type="email"
             className="form-control"
-            name="email_address"
+            name="emailAddress"
+            value={contactInfo.emailAddress}
+            onChange={handleContactInfoChange}
             required
           />
         </div>
