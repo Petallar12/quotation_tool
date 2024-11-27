@@ -68,7 +68,7 @@ const InputForm = () => {
           hs_deductible: "Nil",
           op: "Essential",
           op_co_ins: "Nil",
-          ma: "Essential",
+          ma: "N/A",
           dn: "Essential",
         },
       },
@@ -161,14 +161,16 @@ const InputForm = () => {
         totalPremium: calculateTotalPremium(),
       };
   
-      const result = await axios.post('http://localhost:5000/send-email', emailPayload);
+      const result = await axios.post(
+        "https://quotation-tool-backend.vercel.app/send-email", // Updated to deployed backend URL
+        emailPayload
+      );
       alert(result.data.message);
     } catch (error) {
-      console.error('Error sending email:', error);
-      alert('Failed to send email.');
+      console.error("Error sending email:", error);
+      alert("Failed to send email.");
     }
   };
-  
 
   return (
     <div className="container my-4">
@@ -244,12 +246,12 @@ const InputForm = () => {
             </td>
             <td>$300,000</td>
             <td>$1,000,000</td>
-            <td>2,500,000</td>
-            <td>3,000,000</td>
+            <td>$2,500,000</td>
+            <td>$3,000,000</td>
         </tr>
         <tr>
             <td>Outpatient (Optional)</td>
-            <td>$25,000</td>
+            <td>$2,000</td>
             <td>$5,000</td>
             <td>Full Cover</td>
             <td>Full Cover</td>
@@ -273,7 +275,7 @@ const InputForm = () => {
             <td>Included up to $1,000,000</td>
             <td>Included up to $1,000,000</td>
             <td>Included up to $1,000,000</td>
-            <td>3,000,000</td>
+            <td>Included up to $3,000,000</td>
         </tr>
       </tbody>
 
@@ -365,12 +367,7 @@ const InputForm = () => {
             </div>
           </div>
         ))}
-        <div className="text-center">
-          <button type="submit" className="btn btn-success ms-3">
-            Get Rates
-          </button>
-        </div>
-      </form>
+
 
       {response.length > 0 && (
         <div>
@@ -507,6 +504,12 @@ const InputForm = () => {
           </table>
         </div>
       )}
+              <div className="text-center mt-4">
+          <button type="submit" className="btn btn-success ms-3">
+            Get Rates
+          </button>
+        </div>
+      </form>
             <p className="text-center mt-5">
         By clicking on Submit Application you agree that your data may be used by Medishure to contact you by<br></br>phone or email your insurance application. Find more 
         information on the processing of your<br></br>data in our <span style={{ color: "Red" }}> Personal Data Policy</span>.
