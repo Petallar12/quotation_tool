@@ -427,7 +427,7 @@ const InputForm = () => {
                   </select>
                 </div>
                               {/* Add Remove Button here */}
-                              <div className="col-md-1 text-center">
+        <div className="col-md-1 text-center d-flex align-items-center justify-content-center pt-4">
             <button
               type="button"
               className="btn btn-danger"
