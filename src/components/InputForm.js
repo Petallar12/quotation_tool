@@ -191,6 +191,7 @@ const InputForm = () => {
           }`,
         })),
         totalPremium: calculateTotalPremium(),
+        
       };
   
       const result = await axios.post(
@@ -223,37 +224,16 @@ const InputForm = () => {
       <div className="row mb-3">
         <div className="col-md-4">
           <label>Full Name:</label>
-          <input
-            type="text"
-            className="form-control"
-            name="fullName"
-            value={contactInfo.fullName}
-            onChange={handleContactInfoChange}
-            required
-          />
+          <input type="text"className="form-control"name="fullName" value={contactInfo.fullName} onChange={handleContactInfoChange}  required/>
         </div>
         <div className="col-md-4">
           <label>Contact Number:</label>
-          <input
-            type="text"
-            className="form-control"
-            name="contactNumber"
-            value={contactInfo.contactNumber}
-            onChange={handleContactInfoChange}
-            required
-          />
+          <input type="text" className="form-control" name="contactNumber" value={contactInfo.contactNumber} onChange={handleContactInfoChange}required/>
         </div>
         
         <div className="col-md-4">
           <label>Email Address:</label>
-          <input
-            type="email"
-            className="form-control"
-            name="emailAddress"
-            value={contactInfo.emailAddress}
-            onChange={handleContactInfoChange}
-            required
-          />
+          <input type="email" className="form-control" name="emailAddress" value={contactInfo.emailAddress} onChange={handleContactInfoChange}required/>
         </div>
         <div className="col-md-4">
           <label>Country of Residence:</label>
@@ -263,30 +243,17 @@ const InputForm = () => {
         </div>
         <div className="col-md-4">
           <label>Nationality:</label>
-          <input
-            type="text"
-            className="form-control"
-            name="nationality"
-            value={contactInfo.nationality}
-            onChange={handleContactInfoChange}
-            required
-          />
+          <input type="text" className="form-control" name="nationality" value={contactInfo.nationality}onChange={handleContactInfoChange} required/>
         </div>
         <div className="col-md-4">
           <label>Area of Coverage:</label>
-          <select
-            className="form-control"
-            name="area_of_coverage"
-            value={contactInfo.area_of_coverage}
-            onChange={handleContactInfoChange}
-          >
+          <select className="form-control"name="area_of_coverage"value={contactInfo.area_of_coverage} onChange={handleContactInfoChange}>
                      <option value="Worldwide">Worldwide</option>
                       <option value="Worldwide excl USA">Worldwide excl USA</option>
                       <option value="ASEAN Ex. SG">ASEAN Ex. SG</option>
           </select>
         </div>
       </div>
-
       <table className="table table-bordered table-striped mt-5 text-center">
       <thead>
         <tr>
@@ -296,8 +263,7 @@ const InputForm = () => {
             <th>Extensive</th>
             <th>Elite</th>
         </tr>
-      </thead>
-      
+      </thead>      
       <tbody>
         <tr>
             <td>Hospital Surgery <br></br>
@@ -342,8 +308,6 @@ const InputForm = () => {
         </tr>
       </tbody>
 
-
-
     </table>
       <h4 className="text-left mb-4">
         {" "}
@@ -351,11 +315,7 @@ const InputForm = () => {
       </h4>
       <form onSubmit={handleSubmit}>
         <div className="d-flex justify-content-end mb-2">
-          <button
-            type="button"
-            className="btn btn-primary"
-            onClick={addClient}
-          >
+          <button type="button"className="btn btn-primary" onClick={addClient}>
             <i className="fas fa-user-friends"></i> Add Dependent(s)
           </button>
         </div>
@@ -365,34 +325,15 @@ const InputForm = () => {
               <div className="row">
                 <div className="col-md-3">
                   <label>Name:</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    name="name"
-                    value={client.name}
-                    onChange={(e) => handleClientChange(index, e)}
-                    required
-                  />
+                  <input type="text" className="form-control"name="name" value={client.name}onChange={(e) => handleClientChange(index, e)}required/>
                 </div>
                 <div className="col-md-1">
                   <label>Age:</label>
-                  <input
-                    type="number"
-                    className="form-control"
-                    name="age"
-                    value={client.age}
-                    onChange={(e) => handleClientChange(index, e)}
-                    required
-                  />
+                  <input type="number" className="form-control"name="age" value={client.age} onChange={(e) => handleClientChange(index, e)} required/>
                 </div>
                 <div className="col-md-2">
                   <label>Gender:</label>
-                  <select
-                    className="form-select"
-                    name="gender"
-                    value={client.gender}
-                    onChange={(e) => handleClientChange(index, e)}
-                  >
+                  <select className="form-select" name="gender" value={client.gender}onChange={(e) => handleClientChange(index, e)}>
                     <option value="">Select</option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
@@ -400,13 +341,7 @@ const InputForm = () => {
                 </div>
                 <div className="col-md-3">
                   <label>Payment Frequency:</label>
-                  <select
-                    className="form-select"
-                    name="payment_frequency"
-                    value={client.payment_frequency}
-                    onChange={(e) => handleClientChange(index, e)}
-                    required
-                  >
+                  <select className="form-select" name="payment_frequency" value={client.payment_frequency} onChange={(e) => handleClientChange(index, e)}required>
                     <option value="">Select</option>
                     <option value="Monthly">Monthly</option>
                     <option value="Annually">Annually</option>
@@ -414,43 +349,27 @@ const InputForm = () => {
                 </div>
                 <div className="col-md-2">
                   <label>Relationship:</label>
-                  <select
-                    className="form-select"
-                    name="relationship"
-                    value={client.relationship}
-                    onChange={(e) => handleClientChange(index, e)}
-                    required
-                  >
+                  <select className="form-select" name="relationship" value={client.relationship} onChange={(e) => handleClientChange(index, e)}required>
                     <option value="">Select</option>
                     <option value="Main Applicant">Main Applicant</option>
                     <option value="Dependent">Dependent</option>
                   </select>
                 </div>
                               {/* Add Remove Button here */}
-        <div className="col-md-1 text-center d-flex align-items-center justify-content-center pt-4">
-            <button
-              type="button"
-              className="btn btn-danger"
-              onClick={() => removeClient(index)}
-            >
+        <div className="button col-md-1 text-center d-flex align-items-center justify-content-center pt-4 ">
+            <button type="button" className="btn btn-danger"onClick={() => removeClient(index)} style={{borderRadius: '50%',}}>
               <i className="fas fa-trash-alt"></i>
             </button>
-          </div>
-        </div>
-
-            </div>
-          </div>
+          </div></div></div></div>
         ))}
   
-
+  <h4 className="text-left mt-5">
+        {" "}
+        <span style={{ color: "Green" }}>April (MyHEALTH)Indonesia</span>
+      </h4>
   <div className="col-md-6 mt-4 ">
   <label>Area of Coverage:</label>
-          <select
-            className="form-control"
-            name="area_of_coverage"
-            value={contactInfo.area_of_coverage}
-            onChange={handleContactInfoChange}
-          >
+          <select className="form-control"name="area_of_coverage"value={contactInfo.area_of_coverage}onChange={handleContactInfoChange}>
                      <option value="Worldwide">Worldwide</option>
                       <option value="Worldwide excl USA">Worldwide excl USA</option>
                       <option value="ASEAN Ex. SG">ASEAN Ex. SG</option>
@@ -459,13 +378,11 @@ const InputForm = () => {
   <div>
   <h5 className="mt-4 col-md-12">
     Family Discount Percentage: 
-    {/* {clients.length} {clients.length > 1 ? "dependents" : "dependent"} */}
      {getFamilyDiscountPercentage(clients.length)}% &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Area of Coverage: {contactInfo.area_of_coverage}
   </h5>
 </div>
 
       {response.length > 0 && (
-        
         <div>
           <h2 className="mt-5">Plans and Premiums</h2>
           <table className="table table-bordered table-striped">
@@ -496,13 +413,7 @@ const InputForm = () => {
                         <option value="Essential">Essential</option>
                         <option value="Core">Core</option>
                       </select>
-                      <select
-                        className="form-select"
-                        value={clients[index].plans.hs_deductible}
-                        onChange={(e) =>
-                          handlePlanChange(index, "hs_deductible", e.target.value)
-                        }
-                      >
+                      <select className="form-select"value={clients[index].plans.hs_deductible}onChange={(e) =>handlePlanChange(index, "hs_deductible", e.target.value)}>
                         <option value="Nil">Nil</option>
                         <option value="US$500">US$500</option>
                         <option value="US$1,000">US$1,000</option>
@@ -515,25 +426,14 @@ const InputForm = () => {
                   <td>
                     <div className="d-flex gap-2">
                       <select
-                        className="form-select"
-                        value={clients[index].plans.op}
-                        onChange={(e) =>
-                          handlePlanChange(index, "op", e.target.value)
-                        }
-                      >
+                        className="form-select" value={clients[index].plans.op}onChange={(e) =>handlePlanChange(index, "op", e.target.value)}>
                         <option value="N/A">None</option>
                         <option value="Elite">Elite</option>
                         <option value="Extensive">Extensive</option>
                         <option value="Essential">Essential</option>
                         <option value="Core">Core</option>
                       </select>
-                      <select
-                        className="form-select"
-                        value={clients[index].plans.op_co_ins}
-                        onChange={(e) =>
-                          handlePlanChange(index, "op_co_ins", e.target.value)
-                        }
-                      >
+                      <select className="form-select" value={clients[index].plans.op_co_ins} onChange={(e) => handlePlanChange(index, "op_co_ins", e.target.value)}>
                         <option value="Nil">Nil</option>
                         <option value="20%">20%</option>
                       </select>
@@ -542,13 +442,7 @@ const InputForm = () => {
                     Premium: {rate.op !== "N/A" ? rate.op.toLocaleString() : "N/A"}
                   </td>
                   <td>
-                    <select
-                      className="form-select"
-                      value={clients[index].plans.ma}
-                      onChange={(e) =>
-                        handlePlanChange(index, "ma", e.target.value)
-                      }
-                    >
+                    <select className="form-select"value={clients[index].plans.ma} onChange={(e) =>handlePlanChange(index, "ma", e.target.value)}>
                       <option value="N/A">None</option>
                       <option value="Elite">Elite</option>
                       <option value="Extensive">Extensive</option>
@@ -559,13 +453,7 @@ const InputForm = () => {
                     Premium: {rate.ma !== "N/A" ? rate.ma.toLocaleString() : "N/A"}
                     </td>
                   <td>
-                    <select
-                      className="form-select"
-                      value={clients[index].plans.dn}
-                      onChange={(e) =>
-                        handlePlanChange(index, "dn", e.target.value)
-                      }
-                    >
+                    <select className="form-select"value={clients[index].plans.dn} onChange={(e) => handlePlanChange(index, "dn", e.target.value)}>
                       <option value="N/A">None</option>
                       <option value="Elite">Elite</option>
                       <option value="Extensive">Extensive</option>
@@ -601,19 +489,12 @@ const InputForm = () => {
           </button>
         </div>
       </form>
-            <p className="text-center mt-5">
-        By clicking on Submit Application you agree that your data may be used by Medishure to contact you by<br></br>phone or email your insurance application. Find more 
-        information on the processing of your<br></br>data in our <span style={{ color: "Red" }}> Personal Data Policy</span>.
+            <p className="text-center mt-5">By clicking on Submit Application you agree that your data may be used by Medishure to contact you by<br></br>phone or email your insurance application. Find more information on the processing of your<br></br>data in our <span style={{ color: "Red" }}> Personal Data Policy</span>.
       </p>
       <div className="text-center">
-  <button className="btn btn-success ms-3" onClick={handleEmailSubmit}>
-    Submit Application
-  </button>
+  <button className="btn btn-success ms-3" onClick={handleEmailSubmit}>Submit Application</button>
 </div>
-   
     </div>
-
   );
 };
-
 export default InputForm;
