@@ -11,10 +11,11 @@ const InputForm = () => {
       gender: "",
       payment_frequency: "Annually",
       relationship: "Main Applicant",
+      length:"",
       area_of_coverage: "Worldwide",
       currency: "USD",
       nationality: "Indonesia",
-      country_of_residence: "Indonesia",
+      country_of_residence: "Indonesia",      
       plans: {
         hs: "Essential",
         hs_deductible: "Nil",
@@ -29,9 +30,29 @@ const InputForm = () => {
     fullName: "",
     contactNumber: "",
     emailAddress: "",
+    country_residence: "Indonesia",
+    nationality: "",
+    area_of_coverage: "Worldwide",
   });
   const [response, setResponse] = useState([]);
 
+
+  const getFamilyDiscountPercentage = (numDependents) => {
+    if (numDependents === 2) {
+      return 5;
+    } else if (numDependents === 3) {
+      return 7.5;
+    } else if (numDependents === 4) {
+      return 10;
+    } else if (numDependents >= 5) {
+      return 15; // Max discount for 5 or more dependents
+    } else {
+      return 0; // No discount for 1 applicant
+    }
+  };
+
+
+  
   const handleClientChange = (index, e) => {
     const { name, value } = e.target;
     const updatedClients = [...clients];
@@ -42,7 +63,17 @@ const InputForm = () => {
   const handleContactInfoChange = (e) => {
     const { name, value } = e.target;
     setContactInfo({ ...contactInfo, [name]: value });
+  
+    if (name === "area_of_coverage") {
+      // Update area_of_coverage for all clients when it is changed
+      const updatedClients = clients.map((client) => ({
+        ...client,
+        area_of_coverage: value, // Ensure all clients have the updated area of coverage
+      }));
+      setClients(updatedClients);
+    }
   };
+  
 
   const handlePlanChange = (index, type, value) => {
     const updatedClients = [...clients];
@@ -59,7 +90,8 @@ const InputForm = () => {
         gender: "",
         payment_frequency: "Annually",
         relationship: "Dependent",
-        area_of_coverage: "Worldwide",
+        length:"",
+        area_of_coverage: contactInfo.area_of_coverage,
         currency: "USD",
         nationality: "Indonesia",
         country_of_residence: "Indonesia",
@@ -211,6 +243,7 @@ const InputForm = () => {
             required
           />
         </div>
+        
         <div className="col-md-4">
           <label>Email Address:</label>
           <input
@@ -221,6 +254,36 @@ const InputForm = () => {
             onChange={handleContactInfoChange}
             required
           />
+        </div>
+        <div className="col-md-4">
+          <label>Country of Residence:</label>
+          <select className="form-control" name="country_residence" value={contactInfo.country_residence}>
+              <option value="Indonesia">Indonesia</option>
+          </select>
+        </div>
+        <div className="col-md-4">
+          <label>Nationality:</label>
+          <input
+            type="text"
+            className="form-control"
+            name="nationality"
+            value={contactInfo.nationality}
+            onChange={handleContactInfoChange}
+            required
+          />
+        </div>
+        <div className="col-md-4">
+          <label>Area of Coverage:</label>
+          <select
+            className="form-control"
+            name="area_of_coverage"
+            value={contactInfo.area_of_coverage}
+            onChange={handleContactInfoChange}
+          >
+                     <option value="Worldwide">Worldwide</option>
+                      <option value="Worldwide excl USA">Worldwide excl USA</option>
+                      <option value="ASEAN Ex. SG">ASEAN Ex. SG</option>
+          </select>
         </div>
       </div>
 
@@ -349,7 +412,7 @@ const InputForm = () => {
                     <option value="Annually">Annually</option>
                   </select>
                 </div>
-                <div className="col-md-3">
+                <div className="col-md-2">
                   <label>Relationship:</label>
                   <select
                     className="form-select"
@@ -363,13 +426,46 @@ const InputForm = () => {
                     <option value="Dependent">Dependent</option>
                   </select>
                 </div>
-              </div>
+                              {/* Add Remove Button here */}
+                              <div className="col-md-1 text-center">
+            <button
+              type="button"
+              className="btn btn-danger"
+              onClick={() => removeClient(index)}
+            >
+              <i className="fas fa-trash-alt"></i>
+            </button>
+          </div>
+        </div>
+
             </div>
           </div>
         ))}
+  
 
+  <div className="col-md-6 mt-4 ">
+  <label>Area of Coverage:</label>
+          <select
+            className="form-control"
+            name="area_of_coverage"
+            value={contactInfo.area_of_coverage}
+            onChange={handleContactInfoChange}
+          >
+                     <option value="Worldwide">Worldwide</option>
+                      <option value="Worldwide excl USA">Worldwide excl USA</option>
+                      <option value="ASEAN Ex. SG">ASEAN Ex. SG</option>
+          </select>
+  </div>
+  <div>
+  <h5 className="mt-4 col-md-12">
+    Family Discount Percentage: 
+    {/* {clients.length} {clients.length > 1 ? "dependents" : "dependent"} */}
+     {getFamilyDiscountPercentage(clients.length)}% &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Area of Coverage: {contactInfo.area_of_coverage}
+  </h5>
+</div>
 
       {response.length > 0 && (
+        
         <div>
           <h2 className="mt-5">Plans and Premiums</h2>
           <table className="table table-bordered table-striped">
@@ -393,13 +489,7 @@ const InputForm = () => {
                   </td>
                   <td>
                     <div className="d-flex gap-2">
-                      <select
-                        className="form-select"
-                        value={clients[index].plans.hs}
-                        onChange={(e) =>
-                          handlePlanChange(index, "hs", e.target.value)
-                        }
-                      >
+                      <select className="form-select" value={clients[index].plans.hs} onChange={(e) => handlePlanChange(index, "hs", e.target.value) }>
                         {/* <option value="N/A">None</option> */}
                         <option value="Elite">Elite</option>
                         <option value="Extensive">Extensive</option>
@@ -419,8 +509,9 @@ const InputForm = () => {
                         <option value="US$2,500">US$2,500</option>
                       </select>
                     </div>
-                    Premium: {rate.hs || "N/A"}
-                  </td>
+                    {/* add comma seperator */}                    
+                    Premium: {rate.hs !== "N/A" ? rate.hs.toLocaleString() : "N/A"}
+                    </td>
                   <td>
                     <div className="d-flex gap-2">
                       <select
@@ -447,7 +538,8 @@ const InputForm = () => {
                         <option value="20%">20%</option>
                       </select>
                     </div>
-                    Premium: {rate.op || "N/A"}
+                    {/* add comma seperator */}                    
+                    Premium: {rate.op !== "N/A" ? rate.op.toLocaleString() : "N/A"}
                   </td>
                   <td>
                     <select
@@ -463,8 +555,9 @@ const InputForm = () => {
                       <option value="Essential">Essential</option>
                       <option value="Core">Core</option>
                     </select>
-                    Premium: {rate.ma || "N/A"}
-                  </td>
+                    {/* add comma seperator */}                    
+                    Premium: {rate.ma !== "N/A" ? rate.ma.toLocaleString() : "N/A"}
+                    </td>
                   <td>
                     <select
                       className="form-select"
@@ -479,18 +572,16 @@ const InputForm = () => {
                       <option value="Essential">Essential</option>
                       <option value="Core">Core</option>
                     </select>
-                    Premium: {rate.dn || "N/A"}
-                  </td>
+                    {/* add comma seperator */}
+                    Premium: {rate.dn !== "N/A" ? rate.dn.toLocaleString() : "N/A"}
+                    </td>
                   <td>
                     USD{" "}
                     {["hs", "op", "ma", "dn"]
                       .map((key) =>
-                        rate[key] !== undefined && rate[key] !== "N/A"
-                          ? rate[key]
-                          : 0
+                        rate[key] !== undefined && rate[key] !== "N/A"? rate[key]: 0
                       )
-                      .reduce((sum, premium) => sum + premium, 0)
-                      .toFixed(2)}
+                      .reduce((sum, premium) => sum + premium, 0).toLocaleString()}
                   </td>
                 </tr>
               ))}
