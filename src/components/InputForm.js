@@ -341,7 +341,7 @@ const InputForm = () => {
                 </div>
                 <div className="col-md-2">
                   <label className="field_name">Gender:</label>
-                  <select className="form-select" name="gender" value={client.gender}onChange={(e) => handleClientChange(index, e)}>
+                  <select className="form-select dropdown-font" name="gender" value={client.gender}onChange={(e) => handleClientChange(index, e)}>
                     <option value="">Select</option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
@@ -349,7 +349,7 @@ const InputForm = () => {
                 </div>
                 {/* <div className="col-md-3">
                   <label className="field_name">Payment Frequency:</label>
-                  <select className="form-select" name="payment_frequency" value={client.payment_frequency} onChange={(e) => handleClientChange(index, e)}required>
+                  <select className="form-select dropdown-font" name="payment_frequency" value={client.payment_frequency} onChange={(e) => handleClientChange(index, e)}required>
                     <option value="">Select</option>
                     <option value="Monthly">Monthly</option>
                     <option value="Annually">Annually</option>
@@ -357,7 +357,7 @@ const InputForm = () => {
                 </div> */}
                 <div className="col-md-2">
                   <label className="field_name">Relationship:</label>
-                  <select className="form-select" name="relationship" value={client.relationship} onChange={(e) => handleClientChange(index, e)}required>
+                  <select className="form-select dropdown-font" name="relationship" value={client.relationship} onChange={(e) => handleClientChange(index, e)}required>
                     <option value="">Select</option>
                     <option value="Main Applicant">Main Applicant</option>
                     <option value="Dependent">Dependent</option>
@@ -386,7 +386,7 @@ const InputForm = () => {
   <div>
   <h5 className="mt-4 col-md-12">
     Family Discount Percentage: 
-     {getFamilyDiscountPercentage(clients.length)}% &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+     {" "}{getFamilyDiscountPercentage(clients.length)}% &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
      Area of Coverage: {contactInfo.area_of_coverage}
   </h5>
 </div>
@@ -394,15 +394,29 @@ const InputForm = () => {
 {response.length > 0 && (
   <div>
     <h2 className="mt-5">Plans and Premiums</h2>
-    <table className="table table-bordered table-striped">
+    <table className="table table-bordered table-striped plan">
       <thead>
         <tr>
           <th>Client</th>
-          <th>Hospital & Surgery</th>
-          <th>Outpatient</th>
-          <th>Maternity</th>
-          <th>Dental</th>
+          <th colSpan={2}>Hospital & Surgery</th>
+          <th colSpan={2}>Outpatient</th>
+          <th colSpan={2}>Maternity</th>
+          <th colSpan={2}>Dental</th>
           <th>Subtotal</th>
+        </tr>
+
+        <tr>
+        <th></th>
+        <th>Plan & Room</th>
+        <th>Premium</th>
+        <th>Plan & Room</th>
+        <th>Premium</th>
+        <th>Plan & Room</th>
+        <th>Premium</th>
+        <th>Plan & Room</th>
+        <th>Premium</th>
+        <th></th>
+
         </tr>
       </thead>
       <tbody>
@@ -415,57 +429,61 @@ const InputForm = () => {
             </td>
             <td>
               <div className="d-flex gap-2">
-                <select className="form-select" value={clients[index].plans.hs} onChange={(e) => handlePlanChange(index, "hs", e.target.value)}>
+                <select className="form-select dropdown-font" value={clients[index].plans.hs} onChange={(e) => handlePlanChange(index, "hs", e.target.value)}>
                   <option value="Elite">Elite</option>
                   <option value="Extensive">Extensive</option>
                   <option value="Essential">Essential</option>
                   <option value="Core">Core</option>
                 </select>
-                <select className="form-select" value={clients[index].plans.hs_deductible} onChange={(e) => handlePlanChange(index, "hs_deductible", e.target.value)}>
+                <select className="form-select dropdown-font" value={clients[index].plans.hs_deductible} onChange={(e) => handlePlanChange(index, "hs_deductible", e.target.value)}>
                   <option value="Nil">Nil</option>
                   <option value="US$500">US$500</option>
                   <option value="US$1,000">US$1,000</option>
                   <option value="US$2,500">US$2,500</option>
                 </select>
               </div>
-              Premium: {rate.hs !== "N/A" ? rate.hs.toLocaleString() : "N/A"}
+              {/* Premium: {rate.hs !== "N/A" ? rate.hs.toLocaleString() : "N/A"} */}
             </td>
+            <td>{rate.hs !== "N/A" ? rate.hs.toLocaleString() : "N/A"}</td>
             <td>
               <div className="d-flex gap-2">
-                <select className="form-select" value={clients[index].plans.op} onChange={(e) => handlePlanChange(index, "op", e.target.value)}>
+                <select className="form-select dropdown-font" value={clients[index].plans.op} onChange={(e) => handlePlanChange(index, "op", e.target.value)}>
                   <option value="N/A">None</option>
                   <option value="Elite">Elite</option>
                   <option value="Extensive">Extensive</option>
                   <option value="Essential">Essential</option>
                   <option value="Core">Core</option>
                 </select>
-                <select className="form-select" value={clients[index].plans.op_co_ins} onChange={(e) => handlePlanChange(index, "op_co_ins", e.target.value)}>
+                <select className="form-select dropdown-font" value={clients[index].plans.op_co_ins} onChange={(e) => handlePlanChange(index, "op_co_ins", e.target.value)}>
                   <option value="Nil">Nil</option>
                   <option value="20%">20%</option>
                 </select>
               </div>
-              Premium: {rate.op !== "N/A" ? rate.op.toLocaleString() : "N/A"}
+              {/* Premium: {rate.op !== "N/A" ? rate.op.toLocaleString() : "N/A"} */}
             </td>
+            <td>{rate.op !== "N/A" ? rate.op.toLocaleString() : "N/A"}</td>
             <td>
-              <select className="form-select" value={clients[index].plans.ma} onChange={(e) => handlePlanChange(index, "ma", e.target.value)}>
+              <select className="form-select dropdown-font" value={clients[index].plans.ma} onChange={(e) => handlePlanChange(index, "ma", e.target.value)}>
                 <option value="N/A">None</option>
                 <option value="Elite">Elite</option>
                 <option value="Extensive">Extensive</option>
                 <option value="Essential">Essential</option>
                 <option value="Core">Core</option>
               </select>
-              Premium: {rate.ma !== "N/A" ? rate.ma.toLocaleString() : "N/A"}
+              {/* Premium: {rate.ma !== "N/A" ? rate.ma.toLocaleString() : "N/A"} */}
             </td>
+            <td>{rate.ma !== "N/A" ? rate.ma.toLocaleString() : "N/A"}</td>
             <td>
-              <select className="form-select" value={clients[index].plans.dn} onChange={(e) => handlePlanChange(index, "dn", e.target.value)}>
+              <select className="form-select dropdown-font" value={clients[index].plans.dn} onChange={(e) => handlePlanChange(index, "dn", e.target.value)}>
                 <option value="N/A">None</option>
                 <option value="Elite">Elite</option>
                 <option value="Extensive">Extensive</option>
                 <option value="Essential">Essential</option>
                 <option value="Core">Core</option>
               </select>
-              Premium: {rate.dn !== "N/A" ? rate.dn.toLocaleString() : "N/A"}
+              {/* Premium: {rate.dn !== "N/A" ? rate.dn.toLocaleString() : "N/A"} */}
             </td>
+            <td>{rate.dn !== "N/A" ? rate.dn.toLocaleString() : "N/A"}</td>
             <td>
               USD{" "}
               {["hs", "op", "ma", "dn"]
@@ -477,7 +495,7 @@ const InputForm = () => {
           </tr>
         ))}
         <tr>
-          <td colSpan="5" className="text-end fw-bold">
+          <td colSpan="9" className="text-end fw-bold">
             Total Annual Premium:
           </td>
           <td className="fw-bold">USD {calculateTotalPremium()}</td>

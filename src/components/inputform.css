@@ -12,6 +12,25 @@
     overflow: hidden; /* To ensure rounded corners are visible */
     background-color:black;
     font-size:14px;
+    text-align: center;
   }
 
+  .dropdown-font {
+    font-size: 12px;  /* Adjust this value to make the font smaller or larger */
+  }
   
+  .dropdown-font option {
+    font-size: 12px;  /* Apply the font-size to the options as well */
+  }
+  /* Remove vertical lines between "Plan & Room" and "Premium" columns */
+.table td:nth-child(2), /* Plan & Room for Hospital & Surgery */
+.table td:nth-child(3), /* Premium for Hospital & Surgery */
+.table td:nth-child(4), /* Plan & Room for Outpatient */
+.table td:nth-child(5), /* Premium for Outpatient */
+.table td:nth-child(6), /* Plan & Room for Maternity */
+.table td:nth-child(7), /* Premium for Maternity */
+.table td:nth-child(8), /* Plan & Room for Dental */
+.table td:nth-child(9)  /* Premium for Dental */
+{
+  border-right: none !important;
+}
