@@ -410,9 +410,12 @@ const InputForm = () => {
 
         <tr>
         <th></th>
-        <th>Plan & Room</th>
+        <th><div className="d-flex justify-content-between"><span>Plan & Room</span>
+        <span>Deductible</span></div></th>
         <th>Premium</th>
-        <th>Plan & Room</th>
+        <th><div className="d-flex justify-content-between">
+          <span>Plan & Room</span>
+        <span>Deductible</span></div></th>
         <th>Premium</th>
         <th>Plan & Room</th>
         <th>Premium</th>
@@ -497,12 +500,14 @@ const InputForm = () => {
             </td>
           </tr>
         ))}
-        <tr>
-          <td colSpan="9" className="text-end fw-bold">
-            Total Annual Premium:
-          </td>
-          <td className="fw-bold">USD {calculateTotalPremium()}</td>
-        </tr>
+          <tr>
+            <td colSpan="9" className="text-end fw-bold">
+              Total Annual Premium:
+            </td>
+            <td className="fw-bold">
+              USD {Number(calculateTotalPremium()).toLocaleString()}
+            </td>
+          </tr>
       </tbody>
     </table>
   </div>
