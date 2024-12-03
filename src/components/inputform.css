@@ -1,0 +1,59 @@
+.field_name {
+    font-weight: bold;
+    font-size: 14px;
+  }
+
+  .form-control{
+    font-size:14px
+  }
+
+  .plan{
+    border-radius: 12px;
+    overflow: hidden; /* To ensure rounded corners are visible */
+    background-color:black;
+    font-size:14px;
+  }
+
+  .custom-table {
+    border-radius: 12px;
+    overflow: hidden; /* Ensure rounded corners are visible */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Optional: to add some depth */
+  }
+  
+  .custom-table th,
+  .custom-table td {
+    padding: 15px; /* Add more padding to create space around the content */
+    text-align: center; /* Align text in the center */
+    vertical-align: middle; /* Ensure content is vertically centered */
+  }
+  
+  .custom-table th {
+    background-color: #4CAF50; /* Green background for table headers */
+    color: white; /* White text color */
+    font-weight: bold; /* Bold font for headers */
+    font-size: 16px; /* Adjust font size */
+  }
+  
+  .custom-table td {
+    background-color: #f9f9f9; /* Light background for table rows */
+    font-size: 14px; /* Adjust font size */
+    border-bottom: 1px solid #ddd; /* Border between rows */
+  }
+  
+  .custom-table .table-row:nth-child(even) {
+    background-color: #f2f2f2; /* Alternate row color for even rows */
+  }
+  
+  .custom-table .table-row:hover {
+    background-color: #eaeaea; /* Highlight row on hover */
+  }
+  
+  .custom-table select.form-select {
+    width: 150px; /* Adjust width of the select boxes */
+    font-size: 14px; /* Ensure text size consistency */
+  }
+  
+  .custom-table td {
+    padding: 10px 20px; /* Add some padding around the content */
+  }
+  
