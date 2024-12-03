@@ -38,3 +38,41 @@
 
   }
   
+  /* Three dots loading animation */
+.loading-dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .loading-dots span {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    margin: 0 5px;
+    border-radius: 50%;
+    background-color: #000;
+    animation: dot 1.5s infinite ease-in-out;
+  }
+  
+  .loading-dots span:nth-child(1) {
+    animation-delay: 0s;
+  }
+  
+  .loading-dots span:nth-child(2) {
+    animation-delay: 0.3s;
+  }
+  
+  .loading-dots span:nth-child(3) {
+    animation-delay: 0.6s;
+  }
+  
+  @keyframes dot {
+    0%, 100% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+  

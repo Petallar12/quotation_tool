@@ -53,6 +53,7 @@ const InputForm = () => {
     }
   };
 
+  const [isLoading, setIsLoading] = useState(false); // Track loading status
 
   
   const handleClientChange = (index, e) => {
@@ -202,6 +203,8 @@ if (missingPolicyInfo) {
     alert("Please fill out all policy information fields.");
     return; // Don't proceed if policy info is missing
   }
+    // Start loading
+  setIsLoading(true);
     try {
       const emailPayload = {contactInfo, 
         // email: "calvin@medishure.com", // Your email address to receive the data
@@ -221,7 +224,6 @@ if (missingPolicyInfo) {
           }`,
         })),
         totalPremium: calculateTotalPremium(),
-        
       };
   
       const result = await axios.post(
@@ -232,7 +234,11 @@ if (missingPolicyInfo) {
     } catch (error) {
       console.error("Error sending email:", error);
       alert("Failed to send email.");
-    }
+    }finally {
+    // Stop loading once the process is done
+    setIsLoading(false);
+  }
+    
   };
 
   return (
