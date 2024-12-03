@@ -116,11 +116,24 @@ const InputForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+ // Check if contact information is filled
+ if (!contactInfo.fullName || !contactInfo.contactNumber || !contactInfo.emailAddress || !contactInfo.nationality) {
+  alert("Please fill out all contact information fields.");
+  return; // Don't proceed if contact info is missing
+}
 
+// Check if policy information (clients' details) is filled
+const missingPolicyInfo = clients.some((client) => 
+  !client.name || !client.age || !client.gender || !client.relationship
+);
+
+if (missingPolicyInfo) {
+  alert("Please fill out all policy information fields.");
+  return; // Don't proceed if policy info is missing
+}
     try {
       const token = "your-api-token";
-      const apiUrl =
-        "https://mib-quotetool.com/quoting_api/api/quotations/get_rates";
+      const apiUrl ="https://mib-quotetool.com/quoting_api/api/quotations/get_rates";
 
         const body = {
           contactInfo, // Include contact information
@@ -174,6 +187,21 @@ const InputForm = () => {
   };
 
   const handleEmailSubmit = async () => {
+      // Check if contact information is filled
+  if (!contactInfo.fullName || !contactInfo.contactNumber || !contactInfo.emailAddress || !contactInfo.nationality) {
+    alert("Please fill out all contact information fields.");
+    return; // Don't proceed if contact info is missing
+  }
+
+  // Check if policy information (clients' details) is filled
+  const missingPolicyInfo = clients.some((client) => 
+    !client.name || !client.age || !client.gender || !client.relationship
+  );
+
+  if (missingPolicyInfo) {
+    alert("Please fill out all policy information fields.");
+    return; // Don't proceed if policy info is missing
+  }
     try {
       const emailPayload = {contactInfo, 
         // email: "calvin@medishure.com", // Your email address to receive the data
