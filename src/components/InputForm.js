@@ -220,7 +220,7 @@ const InputForm = () => {
       </h5>
 
       <h4 className="text-left mt-4">
-        {" "}
+  
         <span style={{ color: "Green" }}>Plans</span>
       </h4>
 
@@ -393,7 +393,10 @@ const InputForm = () => {
 
 {response.length > 0 && (
   <div>
-    <h2 className="mt-5">Plans and Premiums</h2>
+      <h4 className="text-left mt-4">        
+        <span style={{ color: "Green" }}>Plans</span>
+      </h4>
+
     <table className="table table-bordered table-striped plan">
       <thead>
         <tr>
