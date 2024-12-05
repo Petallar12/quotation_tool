@@ -83,6 +83,8 @@ const InputForm = () => {
     updatedClients[index].plans[type] = value;
     setClients(updatedClients);
   };
+  // limit the number of clients
+  const CLIENT_LIMIT = 10;
 
   const addClient = () => {
     setClients([
@@ -357,7 +359,9 @@ if (missingPolicyInfo) {
       </h4>
       <form onSubmit={handleSubmit}>
         <div className="d-flex justify-content-end mb-2">
-          <button type="button"className="btn btn-primary" onClick={addClient}>
+          <button type="button"className="btn btn-primary" onClick={addClient}
+                disabled={clients.length >= CLIENT_LIMIT} // Disable button if 10 clients are already added (Limit of 10 clients) 
+          >
             <i className="fas fa-user-friends"></i> Add Dependent(s)
           </button>
         </div>
@@ -397,12 +401,15 @@ if (missingPolicyInfo) {
                     <option value="Dependent">Dependent</option>
                   </select>
                 </div>
-                              {/* Add Remove Button here */}
+        {/* Add Remove Button here */}
+        {/* Conditionally render the trash button only if the client is not the Main Applicant */}
+        {client.relationship !== "Main Applicant" && (
         <div className="button col-md-1 text-center d-flex align-items-center justify-content-center pt-4 ">
             <button type="button" className="btn btn-danger"onClick={() => removeClient(index)} style={{borderRadius: '50%',}}>
               <i className="fas fa-trash-alt"></i>
             </button>
-          </div></div></div></div>
+          </div> )}
+    </div></div></div>
         ))}
   
   <h4 className="text-left mt-5">
