@@ -3,6 +3,7 @@ import axios from "axios";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import './inputform.css';
+import BtnLoader from "./BtnLoader";
 const InputForm = () => {
   const [clients, setClients] = useState([
     {
@@ -527,12 +528,35 @@ if (missingPolicyInfo) {
     Get Rates
   </button>
 </div>
+
       </form>
             <p className="text-center mt-5">
               By clicking on Submit Application you agree that your data may be used by Medishure to contact you by<br></br>phone or email your insurance application. Find more information on the processing of your<br></br>data in our <span style={{ color: "Red" }}> Personal Data Policy</span>.</p>
-      <div className="text-center">
-  <button className="btn btn-success ms-3" onClick={handleEmailSubmit}>Submit Application</button>
+              <div
+  style={{
+    display: "flex",
+    justifyContent: "center", // Centers horizontally
+    alignItems: "center",    // Centers vertically
+
+  }}
+>
+  <button
+    className="btn btn-success"
+    onClick={handleEmailSubmit}
+    disabled={isLoading} // Disable button while loading
+    style={{
+      height: "40px", // Fixed height
+      width: "170px", // Fixed width
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+    }}
+  >
+    {isLoading ? <BtnLoader /> : "Submit Application"}
+  </button>
 </div>
+
+
     </div>
   );
 };
