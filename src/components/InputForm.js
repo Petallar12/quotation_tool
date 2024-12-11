@@ -3,8 +3,6 @@ import axios from "axios";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import './inputform.css';
-
-
 const InputForm = () => {
   const [clients, setClients] = useState([
     {
@@ -38,7 +36,6 @@ const InputForm = () => {
   });
   const [response, setResponse] = useState([]);
 
-
   const getFamilyDiscountPercentage = (numDependents) => {
     if (numDependents === 2) {
       return 5;
@@ -54,7 +51,6 @@ const InputForm = () => {
   };
 
   const [isLoading, setIsLoading] = useState(false); // Track loading status
-
   
   const handleClientChange = (index, e) => {
     const { name, value } = e.target;
@@ -76,7 +72,6 @@ const InputForm = () => {
       setClients(updatedClients);
     }
   };
-  
 
   const handlePlanChange = (index, type, value) => {
     const updatedClients = [...clients];
@@ -249,17 +244,10 @@ if (missingPolicyInfo) {
         I would like to know more about about{" "}
         <span style={{ color: "Green" }}>MY HEALTH</span> Family Discount
       </h1>
-      <h5 className="text-center mb-2">
-        My Health can accept applications from people aged 65 years or younger.
-        To find out the best and discounted plan for <br></br>you and your
-        family, you`ll need to provide some information:
-      </h5>
-
+      <h5 className="text-center mb-2">My Health can accept applications from people aged 65 years or younger.To find out the best and discounted plan for <br></br>you and your family, you`ll need to provide some information:</h5>
       <h4 className="text-left mt-4">
-  
         <span style={{ color: "Green" }}>Plans</span>
       </h4>
-
       <table className="table table-bordered table-striped mt-3 text-center plan">
       <thead>
         <tr>
@@ -343,16 +331,7 @@ if (missingPolicyInfo) {
           <label className="field_name">Nationality:</label>
           <input type="text" className="form-control" name="nationality" value={contactInfo.nationality}onChange={handleContactInfoChange} required/>
         </div>
-        {/* <div className="col-md-4">
-          <label>Area of Coverage:</label>
-          <select className="form-control"name="area_of_coverage"value={contactInfo.area_of_coverage} onChange={handleContactInfoChange}>
-                     <option value="Worldwide">Worldwide</option>
-                      <option value="Worldwide excl USA">Worldwide excl USA</option>
-                      <option value="ASEAN Ex. SG">ASEAN Ex. SG</option>
-          </select>
-        </div> */}
       </div>
-
       <h4 className="text-left mb-4">
         {" "}
         <span style={{ color: "Green" }}>Policy Information</span>
@@ -385,14 +364,6 @@ if (missingPolicyInfo) {
                     <option value="Female">Female</option>
                   </select>
                 </div>
-                {/* <div className="col-md-3">
-                  <label className="field_name">Payment Frequency:</label>
-                  <select className="form-select dropdown-font" name="payment_frequency" value={client.payment_frequency} onChange={(e) => handleClientChange(index, e)}required>
-                    <option value="">Select</option>
-                    <option value="Monthly">Monthly</option>
-                    <option value="Annually">Annually</option>
-                  </select>
-                </div> */}
                 <div className="col-md-2">
                   <label className="field_name">Relationship:</label>
                   <select className="form-select dropdown-font" name="relationship" value={client.relationship} onChange={(e) => handleClientChange(index, e)}required>
@@ -411,7 +382,6 @@ if (missingPolicyInfo) {
           </div> )}
     </div></div></div>
         ))}
-  
   <h4 className="text-left mt-5">
         {" "}
         <span style={{ color: "Green" }}>April (MyHEALTH)Indonesia</span>
@@ -463,7 +433,6 @@ if (missingPolicyInfo) {
         <th>Plan & Room</th>
         <th>Premium</th>
         <th></th>
-
         </tr>
       </thead>
       <tbody>
@@ -558,11 +527,9 @@ if (missingPolicyInfo) {
     Get Rates
   </button>
 </div>
-
       </form>
             <p className="text-center mt-5">
-              By clicking on Submit Application you agree that your data may be used by Medishure to contact you by<br></br>phone or email your insurance application. Find more information on the processing of your<br></br>data in our <span style={{ color: "Red" }}> Personal Data Policy</span>.
-      </p>
+              By clicking on Submit Application you agree that your data may be used by Medishure to contact you by<br></br>phone or email your insurance application. Find more information on the processing of your<br></br>data in our <span style={{ color: "Red" }}> Personal Data Policy</span>.</p>
       <div className="text-center">
   <button className="btn btn-success ms-3" onClick={handleEmailSubmit}>Submit Application</button>
 </div>
