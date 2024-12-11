@@ -523,38 +523,42 @@ if (missingPolicyInfo) {
     </table>
   </div>
 )}
-<div className="text-center mt-4">
-  <button type="submit" className="btn btn-success ms-3">
-    Get Rates
-  </button>
-</div>
+        <div style={{display: "flex",justifyContent: "center", alignItems: "center", }}>
+        <button
+            className="btn btn-success ms-3"
+            onClick={handleSubmit}
+            disabled={isLoading} // Disable button while loading
+            style={{
+              height: "40px", // Fixed height
+              width: "140px", // Fixed width
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            {isLoading ? <BtnLoader /> : "Get Rates"} {/* Add loader or text */}
+          </button>
+        </div>
 
       </form>
-            <p className="text-center mt-5">
+            <p className="text-center mt-4">
               By clicking on Submit Application you agree that your data may be used by Medishure to contact you by<br></br>phone or email your insurance application. Find more information on the processing of your<br></br>data in our <span style={{ color: "Red" }}> Personal Data Policy</span>.</p>
-              <div
-  style={{
-    display: "flex",
-    justifyContent: "center", // Centers horizontally
-    alignItems: "center",    // Centers vertically
-
-  }}
->
-  <button
-    className="btn btn-success"
-    onClick={handleEmailSubmit}
-    disabled={isLoading} // Disable button while loading
-    style={{
-      height: "40px", // Fixed height
-      width: "170px", // Fixed width
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-    }}
-  >
-    {isLoading ? <BtnLoader /> : "Submit Application"}
-  </button>
-</div>
+        <div style={{display: "flex",justifyContent: "center", alignItems: "center", }}>
+          <button
+              className="btn btn-success"
+              onClick={handleEmailSubmit}
+              disabled={isLoading} // Disable button while loading
+              style={{
+                height: "40px", // Fixed height
+                width: "170px", // Fixed width
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              {isLoading ? <BtnLoader /> : "Submit Application"}
+          </button>
+      </div>
 
 
     </div>
