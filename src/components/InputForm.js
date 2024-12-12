@@ -214,18 +214,20 @@ if (missingPolicyInfo) {
         // email: "calvin@medishure.com", // Your email address to receive the data
         plans: response.map((rate, index) => ({
           client: `${clients[index].name} (${clients[index].gender}, ${clients[index].age})`,
+          hospitalSurgeryPlan: clients[index].plans.hs,
+          hospitalSurgeryDeductible: clients[index].plans.hs_deductible,
           hospitalSurgery: `Premium: USD ${rate.hs || "N/A"}`,
+          outpatientPlan: clients[index].plans.op,
+          outpatientDeductible: clients[index].plans.op_co_ins,
           outpatient: `Premium: USD ${rate.op || "N/A"}`,
+          maternityPlan: clients[index].plans.ma,
           maternity: `Premium: USD ${rate.ma || "N/A"}`,
+          dentalPlan: clients[index].plans.dn,
           dental: `Premium: USD ${rate.dn || "N/A"}`,
-          subtotal: `USD ${
-            ["hs", "op", "ma", "dn"]
-              .map((key) =>
-                rate[key] !== undefined && rate[key] !== "N/A" ? rate[key] : 0
-              )
-              .reduce((sum, premium) => sum + premium, 0)
-              .toFixed(2)
-          }`,
+          subtotal: `USD ${["hs", "op", "ma", "dn"]
+            .map((key) => (rate[key] !== undefined && rate[key] !== "N/A" ? rate[key] : 0))
+            .reduce((sum, premium) => sum + premium, 0)
+            .toFixed(2)}`,
         })),
         totalPremium: calculateTotalPremium(),
       };
