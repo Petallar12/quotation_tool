@@ -57,7 +57,11 @@ const InputForm = () => {
     }
   };
 
-  const [isLoading, setIsLoading] = useState(false); // Track loading status
+  const [loadingState, setLoadingState] = useState({
+    getRates: false,
+    submitApplication: false,
+  });
+  // Track loading status
   
   const handleClientChange = (index, e) => {
     const { name, value } = e.target;
@@ -136,6 +140,8 @@ if (missingPolicyInfo) {
   alert("Please fill out all policy information fields.");
   return; // Don't proceed if policy info is missing
 }
+setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for Get Rates
+
     try {
       const token = "your-api-token";
       const apiUrl ="https://mib-quotetool.com/quoting_api/api/quotations/get_rates";
@@ -177,6 +183,8 @@ if (missingPolicyInfo) {
       alert(
         "Failed to fetch data. Please check your input or API requirements."
       );
+    }finally {
+      setLoadingState((prev) => ({ ...prev, getRates: false })); // Stop loading
     }
   };
 
@@ -208,7 +216,7 @@ if (missingPolicyInfo) {
     return; // Don't proceed if policy info is missing
   }
     // Start loading
-  setIsLoading(true);
+    setLoadingState((prev) => ({ ...prev, submitApplication: true })); // Start loading for Submit Application
     try {
       const emailPayload = {contactInfo, 
         // email: "calvin@medishure.com", // Your email address to receive the data
@@ -241,9 +249,8 @@ if (missingPolicyInfo) {
       console.error("Error sending email:", error);
       alert("Failed to send email.");
     }finally {
-    // Stop loading once the process is done
-    setIsLoading(false);
-  }
+      setLoadingState((prev) => ({ ...prev, submitApplication: false })); // Stop loading
+    }
     
   };
 
@@ -532,47 +539,22 @@ if (missingPolicyInfo) {
   </div>
 )}
         <div style={{display: "flex",justifyContent: "center", alignItems: "center", }}>
-        <button
-            className="btn btn-success ms-3"
-            onClick={handleSubmit}
-            disabled={isLoading} // Disable button while loading
-            style={{
-              height: "40px", // Fixed height
-              width: "140px", // Fixed width
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            {isLoading ? <BtnLoader /> : "Get Rates"} {/* Add loader or text */}
-          </button>
+        <button onClick={handleSubmit} disabled={loadingState.getRates} className="btn btn-primary">
+            {loadingState.getRates ? <BtnLoader /> : "Get Rates"}
+        </button>
         </div>
 
       </form>
             <p className="text-center mt-4">
               By clicking on Submit Application you agree that your data may be used by Medishure to contact you by<br></br>phone or email your insurance application. Find more information on the processing of your<br></br> data in our{" "}
-  <span
-    style={{ color: "Red", cursor: "pointer" }}
-    data-bs-toggle="modal"
-    data-bs-target="#personalDataPolicyModal"
-  >
+  <span style={{ color: "Red", cursor: "pointer" }} data-bs-toggle="modal" data-bs-target="#personalDataPolicyModal">
     Personal Data Policy
   </span>.</p>
-        <div style={{display: "flex",justifyContent: "center", alignItems: "center", }}>
-          <button
-              className="btn btn-success"
-              onClick={handleEmailSubmit}
-              disabled={isLoading} // Disable button while loading
-              style={{
-                height: "40px", // Fixed height
-                width: "170px", // Fixed width
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              {isLoading ? <BtnLoader /> : "Submit Application"}
-          </button>
+
+      <div style={{display: "flex",justifyContent: "center", alignItems: "center", }}>
+        <button onClick={handleEmailSubmit} disabled={loadingState.submitApplication} className="btn btn-success" >
+            {loadingState.submitApplication ? <BtnLoader /> : "Submit Application"}
+        </button>
       </div>
     {/* Place the modal here */}
     <div
