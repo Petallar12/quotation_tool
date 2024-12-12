@@ -539,7 +539,7 @@ setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for G
   </div>
 )}
         <div style={{display: "flex",justifyContent: "center", alignItems: "center", }}>
-        <button onClick={handleSubmit} disabled={loadingState.getRates} className="btn btn-primary">
+        <button onClick={handleSubmit} disabled={loadingState.getRates} className="btn btn-success">
             {loadingState.getRates ? <BtnLoader /> : "Get Rates"}
         </button>
         </div>
