@@ -584,7 +584,7 @@ setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for G
           <b>1. Introduction<br/></b>
           Welcome to our April quote tool. At Luke Medikal International, we respect and value your privacy. This Personal Data Privacy Policy outlines how we collect, use, store, and protect your personal information when you use our quote form available at lukemedikal.co.id.
           By using our quotation form, you consent to the terms of this policy.<br/>
-          __________________________________________________________________<br/>
+          <hr/><br/>
           <b>2. Information We Collect</b><br/>
           When you submit a quote request through our form, we may collect the following personal data:<br/>
           •	Full Name<br/>
@@ -592,7 +592,7 @@ setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for G
           •	Location Details<br/>
           •	Age & Gender<br/>
           We collect this information solely for the purposes outlined below.<br/>
-          __________________________________________________________________<br/>
+          <hr/><br/>
           <b>3. How We Use Your Information</b><br/>
           We use the personal information collected through the quote form to:<br/>
           •	Provide you with accurate quotes and pricing information.<br/>
@@ -600,20 +600,20 @@ setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for G
           •	Improve our services and customer experience.<br/>
           •	Maintain internal records for administrative purposes.<br/>
           Your information will not be used for marketing purposes unless you provide explicit consent.<br/>
-          __________________________________________________________________<br/>
+          <hr/><br/>
           <b>4. How We Store and Protect Your Information</b><br/>
           We take appropriate technical and organizational measures to protect your personal data from unauthorized access, use, or disclosure. These include:<br/>
           •	Secure data storage methods.<br/>
           •	Limited access to personal data (only authorized personnel).<br/>
           •	Encryption and security protocols to safeguard information transmitted online.<br/>
           We retain your personal information only as long as necessary to fulfill the purpose for which it was collected or to comply with legal obligations.<br/>
-          __________________________________________________________________<br/>
+          <hr/><br/>
           <b>5. Sharing of Your Information</b><br/>
           We do not sell, rent, or trade your personal information to third parties. Your data may only be shared under the following circumstances:<br/>
           •	With Your Consent: When you explicitly authorize us to share information.<br/>
           •	Legal Requirements: If required by law, regulation, or valid legal process.<br/>
           •	Service Providers: Trusted third parties who assist us in operating the quotation tool (e.g., email or hosting services).<br/>
-          __________________________________________________________________<br/>
+          <hr/><br/>
           <b>6. Your Rights</b><br/>
           Under applicable data protection laws, you have the right to:<br/>
           •	Access the personal information we hold about you.<br/>
@@ -621,10 +621,10 @@ setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for G
           •	Request deletion of your data where applicable.<br/>
           •	Object to the processing of your data in certain circumstances.<br/>
           To exercise these rights or if you have privacy-related concerns, please contact us at info@lukemedikal.co.id<br/>
-          __________________________________________________________________<br/>
+          <hr/><br/>
           <b>7. Changes to This Policy</b><br/>
           We may update this Privacy Policy from time to time to reflect changes in our practices or legal requirements. The updated version will be posted on this page with the "Effective Date".
-          <br/>__________________________________________________________________<br/>
+          <br/><hr/><br/>
           <b>8. Contact Us</b><br/>
           If you have any questions or concerns about this Privacy Policy or how your data is handled, please contact us:<br/>
           Luke Medikal International<br/>
