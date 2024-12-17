@@ -37,3 +37,29 @@
     font-weight: bold;      /* Optional: Make the text bold */
 
   }
+  .form-select.dropdown-font {
+    min-width: 100px; /* Adjust as needed */
+    white-space: normal; /* Allow wrapping of text */
+    overflow: visible; /* Ensure dropdown fully shows content */
+  }
+  /* Scrollable Modal */
+.modal-dialog {
+  max-width: 500px; /* Adjust the modal width if needed */
+}
+
+.modal-content {
+  height: 800px; /* Fixed height for the modal */
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-body {
+  overflow-y: auto; /* Scroll when content exceeds height */
+  flex: 1; /* Allow body to take remaining space */
+  padding: 1rem; /* Adjust padding */
+}
+
+.modal-header,
+.modal-footer {
+  flex-shrink: 0; /* Prevent shrinking */
+}
