@@ -4,7 +4,8 @@
   }
 
   .form-control{
-    font-size:14px
+    font-size:14px;
+    min-width: 100px; /* Adjust as needed */
   }
 
   .plan{
@@ -44,7 +45,7 @@
   }
   /* Scrollable Modal */
 .modal-dialog {
-  max-width: 500px; /* Adjust the modal width if needed */
+  max-width: 1000px; /* Adjust the modal width if needed */
 }
 
 .modal-content {
