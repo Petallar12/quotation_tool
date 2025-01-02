@@ -6,6 +6,9 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 import './inputform.css';
 import BtnLoader from "./BtnLoader";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 {/* <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script> */}
 
@@ -127,7 +130,7 @@ const InputForm = () => {
     e.preventDefault();
  // Check if contact information is filled
  if (!contactInfo.fullName || !contactInfo.contactNumber || !contactInfo.emailAddress || !contactInfo.nationality) {
-  alert("Please fill out all contact information fields.");
+  toast.error("Please fill out all contact information fields.");
   return; // Don't proceed if contact info is missing
 }
 
@@ -137,7 +140,7 @@ const missingPolicyInfo = clients.some((client) =>
 );
 
 if (missingPolicyInfo) {
-  alert("Please fill out all policy information fields.");
+  toast.error("Please fill out all contact information fields.");
   return; // Don't proceed if policy info is missing
 }
 setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for Get Rates
@@ -178,11 +181,12 @@ setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for G
           dn: rate.dn ? parseFloat(rate.dn.toFixed(2)) : "N/A",
         }))
       );
+      toast.success("Rates fetched successfully!");
+
     } catch (error) {
       console.error("Error fetching API:", error.response || error.message);
-      alert(
-        "Failed to fetch data. Please check your input or API requirements."
-      );
+      toast.error("Failed to fetch data. Please check your input or API requirements.");
+
     }finally {
       setLoadingState((prev) => ({ ...prev, getRates: false })); // Stop loading
     }
@@ -202,7 +206,7 @@ setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for G
   const handleEmailSubmit = async () => {
       // Check if contact information is filled
   if (!contactInfo.fullName || !contactInfo.contactNumber || !contactInfo.emailAddress || !contactInfo.nationality) {
-    alert("Please fill out all contact information fields.");
+    toast.error("Please fill out all contact information fields.");
     return; // Don't proceed if contact info is missing
   }
 
@@ -212,7 +216,8 @@ setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for G
   );
 
   if (missingPolicyInfo) {
-    alert("Please fill out all policy information fields.");
+    toast.error("Please fill out all contact information fields.");
+
     return; // Don't proceed if policy info is missing
   }
     // Start loading
@@ -244,10 +249,10 @@ setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for G
         "https://quotation-tool-backend.vercel.app/send-email", // Updated to deployed backend URL
         emailPayload
       );
-      alert(result.data.message);
+      toast.success("Email successfully sent!");
     } catch (error) {
       console.error("Error sending email:", error);
-      alert("Failed to send email.");
+      toast.error("Failed to send email.");
     }finally {
       setLoadingState((prev) => ({ ...prev, submitApplication: false })); // Stop loading
     }
@@ -255,7 +260,11 @@ setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for G
   };
 
   return (
+
+    
     <div className="container my-4">
+    <ToastContainer position="top-center" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
+
       <h1 className="text-center mb-2">
         I would like to know more about about{" "}
         <span style={{ color: "Green" }}>MY HEALTH</span> Family Discount
