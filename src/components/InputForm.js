@@ -266,7 +266,7 @@ setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for G
     <ToastContainer position="top-center" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
 
       <h1 className="text-center mb-2">
-        I would like to know more about about{" "}
+        I would like to know more about{" "}
         <span style={{ color: "Green" }}>MY HEALTH</span> Family Discount
       </h1>
       <h5 className="text-center mb-2">My Health can accept applications from people aged 65 years or younger. To find out the best and discounted plan for <br></br>you and your family, you`ll need to provide some information:</h5>
