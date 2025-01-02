@@ -400,7 +400,7 @@ setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for G
                  {/* Conditionally render the Add Dependent button only for the first client */}
             {index === 0 && (
                 <div className="button col-md-1 text-center d-flex align-items-center justify-content-center pt-4 ">
-                    <button type="button" className="btn btn-primary" onClick={addClient}style={{borderRadius: '50%', padding :'8px 10px `'}} disabled={clients.length >= CLIENT_LIMIT}>
+                    <button type="button" className="btn btn-primary" onClick={addClient}style={{borderRadius: '50%', padding :'8px 10px '}} disabled={clients.length >= CLIENT_LIMIT}>
                     <i class="fa-solid fa-user-plus"></i>
                     </button>
                 </div>
