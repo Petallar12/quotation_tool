@@ -362,13 +362,13 @@ setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for G
         <span style={{ color: "Green" }}>Policy Information</span>
       </h4>
       <form onSubmit={handleSubmit}>
-        <div className="d-flex justify-content-end mb-2">
+        {/* <div className="d-flex justify-content-end mb-2">
           <button type="button"className="btn btn-primary" onClick={addClient}
                 disabled={clients.length >= CLIENT_LIMIT} // Disable button if 10 clients are already added (Limit of 10 clients) 
           >
             <i className="fas fa-user-friends"></i> Add Dependent(s)
           </button>
-        </div>
+        </div> */}
         {clients.map((client, index) => (
           <div key={index} className="mb-3">
             <div>
@@ -397,6 +397,14 @@ setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for G
                     <option value="Dependent">Dependent</option>
                   </select>
                 </div>
+                 {/* Conditionally render the Add Dependent button only for the first client */}
+            {index === 0 && (
+                <div className="button col-md-1 text-center d-flex align-items-center justify-content-center pt-4 ">
+                    <button type="button" className="btn btn-primary" onClick={addClient}style={{borderRadius: '50%',}} disabled={clients.length >= CLIENT_LIMIT}>
+                    <i class="fa-solid fa-user-plus"></i>
+                    </button>
+                </div>
+            )}
         {/* Add Remove Button here */}
         {/* Conditionally render the trash button only if the client is not the Main Applicant */}
         {client.relationship !== "Main Applicant" && (
@@ -405,7 +413,9 @@ setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for G
               <i className="fas fa-trash-alt"></i>
             </button>
           </div> )}
-    </div></div></div>
+          </div>
+    
+    </div></div>
         ))}
   <h4 className="text-left mt-5">
         {" "}
