@@ -1,19 +1,22 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-
+import { Tooltip } from 'bootstrap'; // Make sure to import Tooltip
 import './inputform.css';
 import BtnLoader from "./BtnLoader";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-
 {/* <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script> */}
 
 
 const InputForm = () => {
+  useEffect(() => {
+    // Initialize tooltips
+    const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    tooltipTriggerList.map(tooltipTriggerEl => new Tooltip(tooltipTriggerEl));
+  }, []);
   const [clients, setClients] = useState([
     {
       name: "",
@@ -400,7 +403,7 @@ setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for G
                  {/* Conditionally render the Add Dependent button only for the first client */}
             {index === 0 && (
                 <div className="button col-md-1 text-center d-flex align-items-center justify-content-center pt-4 ">
-                    <button type="button" className="btn btn-primary" onClick={addClient}style={{borderRadius: '50%', padding :'8px 10px '}} disabled={clients.length >= CLIENT_LIMIT}>
+                    <button title="Add Dependent" type="button" className="btn btn-primary" onClick={addClient}style={{borderRadius: '50%', padding :'8px 10px '}} disabled={clients.length >= CLIENT_LIMIT}>
                     <i class="fa-solid fa-user-plus"></i>
                     </button>
                 </div>
@@ -409,7 +412,7 @@ setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for G
         {/* Conditionally render the trash button only if the client is not the Main Applicant */}
         {client.relationship !== "Main Applicant" && (
         <div className="button col-md-1 text-center d-flex align-items-center justify-content-center pt-4 ">
-            <button type="button" className="btn btn-danger"onClick={() => removeClient(index)} style={{borderRadius: '50%',}}>
+            <button title="Remove Dependent" type="button" className="btn btn-danger"onClick={() => removeClient(index)} style={{borderRadius: '50%',}}>
               <i className="fas fa-trash-alt"></i>
             </button>
           </div> )}
