@@ -11,6 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 {/* <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script> */}
 
 
+
 const InputForm = () => {
   useEffect(() => {
     // Initialize tooltips
@@ -608,7 +609,7 @@ setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for G
                 By using our quotation form, you consent to the terms of this policy.<br/></span>
                 <hr/><br/>
                 <b>2. Information We Collect</b><br/>
-                <span style={{ fontSize: '14px' }}>When you submit a quote request through our form, we may collect the following personal data:<br/>
+                <span style={{ fontSize: '14px' }}>When you submit a quote request through our form, we may collect the following Personal data:<br/>
                 &nbsp;•	Full Name<br/>
                 &nbsp;•	Contact Information (e.g., email address, phone number)<br/>
                 &nbsp;•	Location Details<br/>
