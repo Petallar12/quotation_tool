@@ -40,15 +40,4 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
   </body>
-  <script>
-    function sendHeightToParent() {
-      window.parent.postMessage({ height: document.body.scrollHeight }, "*");
-    }
-
-    // Send the initial height when the iframe content loads
-    document.addEventListener("DOMContentLoaded", sendHeightToParent);
-
-    // Add event listeners or use MutationObserver to detect content changes
-    // and call sendHeightToParent() when necessary
-  </script>
 </html>
