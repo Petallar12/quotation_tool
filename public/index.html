@@ -40,4 +40,19 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
   </body>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        function postHeight() {
+            var height = document.documentElement.scrollHeight || document.body.scrollHeight;
+            window.parent.postMessage({ type: 'resize', height: height }, '*');
+        }
+        
+        // Post initial height
+        postHeight();
+    
+        // If content changes height based on interactions, recalculate and post new height
+        window.addEventListener('resize', postHeight);
+    });
+    </script>
+    
 </html>
