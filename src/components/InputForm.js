@@ -385,7 +385,7 @@ setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for G
                   <label className="field_name">Age:</label>
                   <input type="number" className="form-control"name="age" value={client.age} onChange={(e) => handleClientChange(index, e)} required/>
                 </div>
-                <div className="col-md-2">
+                <div className="col-md-3">
                   <label className="field_name">Gender:</label>
                   <select className="form-select dropdown-font" name="gender" value={client.gender}onChange={(e) => handleClientChange(index, e)}>
                     <option value="">Select</option>
@@ -393,7 +393,7 @@ setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for G
                     <option value="Female">Female</option>
                   </select>
                 </div>
-                <div className="col-md-2">
+                <div className="col-md-3">
                   <label className="field_name">Relationship:</label>
                   <select className="form-select dropdown-font" name="relationship" value={client.relationship} onChange={(e) => handleClientChange(index, e)}required>
                     <option value="">Select</option>
@@ -417,10 +417,7 @@ setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for G
               <i className="fas fa-trash-alt"></i>
             </button>
           </div> )}
-          </div>
-    
-    </div></div>
-        ))}
+
   <h4 className="text-left mt-5">
         {" "}
         <span style={{ color: "Green" }}>April (MyHEALTH)Indonesia</span>
@@ -432,7 +429,12 @@ setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for G
                       <option value="Worldwide excl USA">Worldwide excl USA</option>
                       <option value="ASEAN Ex. SG">ASEAN Ex. SG</option>
           </select>
+  </div>          
   </div>
+  </div>
+  </div>
+        ))}
+
   <div>
   <h5 className="mt-4 col-md-12">
     Family Discount Percentage: 
@@ -608,7 +610,7 @@ setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for G
                 <span style={{ fontSize: '14px' }}>Welcome to our April quote tool. At Luke Medikal International, we respect and value your privacy. This Personal Data Privacy Policy outlines how we collect, use, store, and protect your personal information when you use our quote form available at lukemedikal.co.id.
                 By using our quotation form, you consent to the terms of this policy.<br/></span>
                 <hr/><br/>
-                <b>2. Information We Collect</b><br/>
+                <b>2. Inxollect</b><br/>
                 <span style={{ fontSize: '14px' }}>When you submit a quote request through our form, we may collect the following Personal data:<br/>
                 &nbsp;•	Full Name<br/>
                 &nbsp;•	Contact Information (e.g., email address, phone number)<br/>

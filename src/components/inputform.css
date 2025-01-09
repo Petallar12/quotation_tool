@@ -5,6 +5,7 @@
 
   .form-control{
     font-size:14px;
+    height:31px;
     min-width: 100px; /* Adjust as needed */
   }
 
@@ -21,6 +22,8 @@
 
   .dropdown-font {
     font-size: 12px;  /* Adjust this value to make the font smaller or larger */
+    height:31px;
+
   }
   
   .dropdown-font option {
