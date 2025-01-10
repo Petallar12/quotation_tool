@@ -277,8 +277,8 @@ setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for G
       <h4 className="text-left mt-4">
         <span style={{ color: "Green" }}>Plans</span>
       </h4>
-      <table className="table table-bordered table-striped mt-3 text-center plan">
-      <thead>
+      <div className="responsive-table">
+  <table className="table table-bordered table-striped mt-3 text-center plan">     <thead>
         <tr>
             <th>Modules</th>
             <th>Core</th>
@@ -332,6 +332,7 @@ setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for G
       </tbody>
 
     </table>
+    </div>
       <h4 className="text-left mb-4">
         {" "}
         <span style={{ color: "Green" }}>Contact Information</span>

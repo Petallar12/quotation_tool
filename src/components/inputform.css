@@ -67,3 +67,19 @@
 .modal-footer {
   flex-shrink: 0; /* Prevent shrinking */
 }
+
+.responsive-table {
+  overflow-x: auto;  
+  width: 100%;       
+  margin-top: 20px;  
+}
+
+.responsive-table table {
+  width: auto;       
+  min-width: 100%;   
+}
+
+/* Optional: Adds styling to the table to improve visibility */
+.table {
+  white-space: nowrap;  
+}
