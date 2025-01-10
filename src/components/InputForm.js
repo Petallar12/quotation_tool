@@ -417,24 +417,24 @@ setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for G
               <i className="fas fa-trash-alt"></i>
             </button>
           </div> )}
-
-  <h4 className="text-left mt-5">
+          </div>
+    
+    </div></div>
+        ))}
+      <h4 className="text-left mt-5">
         {" "}
         <span style={{ color: "Green" }}>April (MyHEALTH)Indonesia</span>
       </h4>
-  <div className="col-md-3 mt-4 ">
+      <div className="row">
+      <div className="col-md-3">
   <label className="field_name">Area of Coverage:</label>
           <select className="form-select dropdown-font"name="area_of_coverage"value={contactInfo.area_of_coverage}onChange={handleContactInfoChange}>
                      <option value="Worldwide">Worldwide</option>
                       <option value="Worldwide excl USA">Worldwide excl USA</option>
                       <option value="ASEAN Ex. SG">ASEAN Ex. SG</option>
           </select>
-  </div>          
-  </div>
-  </div>
-  </div>
-        ))}
-
+          </div>
+          </div>
   <div>
   <h5 className="mt-4 col-md-12">
     Family Discount Percentage: 
