@@ -83,3 +83,22 @@
 .table {
   white-space: nowrap;  
 }
+
+
+.error-message {
+  color: red;       /* Red text color */
+  font-size: 12px;  /* Smaller font size */
+  background: none; /* No background color */
+  border: none;     /* No border */
+  padding: 0;       /* No padding */
+  margin: 0;        /* No margin */
+}
+
+.success-message {
+  color: green;       /* Red text color */
+  font-size: 12px;  /* Smaller font size */
+  background: none; /* No background color */
+  border: none;     /* No border */
+  padding: 0;       /* No padding */
+  margin: 0;        /* No margin */
+}

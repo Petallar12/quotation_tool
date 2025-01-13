@@ -130,11 +130,24 @@ const InputForm = () => {
     setResponse((prevResponse) => prevResponse.filter((_, i) => i !== index));
   };
 
+
+
+  const [message, setMessage] = useState('');
+  const [messageType, setMessageType] = useState('');
+  const displayMessage = (msg, type) => {
+    setMessage(msg);
+    setMessageType(type);  // This determines where the message will be shown
+    setShowMessage(true);
+    setTimeout(() => setShowMessage(false), 3000);
+  };
+  const [showMessage, setShowMessage] = useState(false);
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
  // Check if contact information is filled
  if (!contactInfo.fullName || !contactInfo.contactNumber || !contactInfo.emailAddress || !contactInfo.nationality) {
-  toast.error("Please fill out all contact information fields.");
+  displayMessage("Please fill out all required fields.", "getRates");
   return; // Don't proceed if contact info is missing
 }
 
@@ -144,7 +157,7 @@ const missingPolicyInfo = clients.some((client) =>
 );
 
 if (missingPolicyInfo) {
-  toast.error("Please fill out all contact information fields.");
+  displayMessage("Please fill out all required fields.", "getRates");
   return; // Don't proceed if policy info is missing
 }
 setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for Get Rates
@@ -185,11 +198,11 @@ setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for G
           dn: rate.dn ? parseFloat(rate.dn.toFixed(2)) : "N/A",
         }))
       );
-      toast.success("Rates fetched successfully!");
+      displayMessage("", "getRates");
 
     } catch (error) {
       console.error("Error fetching API:", error.response || error.message);
-      toast.error("Failed to fetch data. Please check your input or API requirements.");
+      displayMessage("Failed to fetch data. Please check your inputs.", "getRates");
 
     }finally {
       setLoadingState((prev) => ({ ...prev, getRates: false })); // Stop loading
@@ -210,7 +223,7 @@ setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for G
   const handleEmailSubmit = async () => {
       // Check if contact information is filled
   if (!contactInfo.fullName || !contactInfo.contactNumber || !contactInfo.emailAddress || !contactInfo.nationality) {
-    toast.error("Please fill out all contact information fields.");
+    displayMessage("Please fill out all required fields.", "getRates");
     return; // Don't proceed if contact info is missing
   }
 
@@ -220,7 +233,7 @@ setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for G
   );
 
   if (missingPolicyInfo) {
-    toast.error("Please fill out all contact information fields.");
+    displayMessage("Please fill out all required fields.", "getRates");
 
     return; // Don't proceed if policy info is missing
   }
@@ -253,10 +266,10 @@ setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for G
         "https://quotation-tool-backend.vercel.app/send-email", // Updated to deployed backend URL
         emailPayload
       );
-      toast.success("Email successfully sent!");
+      displayMessage("Email successfully sent!", "submitApplication");
     } catch (error) {
       console.error("Error sending email:", error);
-      toast.error("Failed to send email.");
+      displayMessage("Failed to send email.", "submitApplication");
     }finally {
       setLoadingState((prev) => ({ ...prev, submitApplication: false })); // Stop loading
     }
@@ -267,7 +280,7 @@ setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for G
 
     
     <div className="container my-4">
-    <ToastContainer position="top-center" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
+    {showMessage && <p className="alert alert-info">{message}</p>}
 
       <h1 className="text-center mb-2">
         I would like to know more about{" "}
@@ -564,11 +577,12 @@ setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for G
     </table>
   </div><br/></div>
 )}
-        <div style={{display: "flex",justifyContent: "center", alignItems: "center", }}>
-        <button onClick={handleSubmit} disabled={loadingState.getRates} className="btn btn-success">
-            {loadingState.getRates ? <BtnLoader /> : "Get Rates"}
-        </button>
-        </div>
+<div style={{ display: "flex", flexDirection: "column", alignItems: "center", margin: "20px", }}>
+  <button onClick={handleSubmit} disabled={loadingState.getRates} className="btn btn-success">
+    {loadingState.getRates ? <BtnLoader /> : "Get Rates"}
+  </button>
+  {showMessage && messageType === 'getRates' && <p className="error-message">{message}</p>}
+</div>
 
       </form>
             <p className="text-center mt-4" style={{ fontSize: '12px' }}>
@@ -577,11 +591,13 @@ setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for G
     Personal Data Policy
   </span>.</p>
 
-      <div style={{display: "flex",justifyContent: "center", alignItems: "center", }}>
-        <button onClick={handleEmailSubmit} disabled={loadingState.submitApplication} className="btn btn-success" >
-            {loadingState.submitApplication ? <BtnLoader /> : "Submit Application"}
-        </button>
-      </div>
+{/* Below the Submit Application button */}
+<div style={{ display: "flex", flexDirection: "column", alignItems: "center", margin: "20px" }}>
+  <button onClick={handleEmailSubmit} disabled={loadingState.submitApplication} className="btn btn-success">
+    {loadingState.submitApplication ? <BtnLoader /> : "Submit Application"}
+  </button>
+  {showMessage && messageType === 'submitApplication' && <p className="success-message">{message}</p>}
+</div>
     {/* Place the modal here */}
     <div
       className="modal fade"
