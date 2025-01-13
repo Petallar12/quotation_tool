@@ -134,6 +134,9 @@ const InputForm = () => {
 
   const [message, setMessage] = useState('');
   const [messageType, setMessageType] = useState('');
+  const [submitMessage, setSubmitMessage] = useState('');
+const [submitMessageType, setSubmitMessageType] = useState(''); // 'success' or 'error'
+
   const displayMessage = (msg, type) => {
     setMessage(msg);
     setMessageType(type);  // This determines where the message will be shown
@@ -267,9 +270,11 @@ setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for G
         emailPayload
       );
       displayMessage("Email successfully sent!", "submitApplication");
+      setSubmitMessageType("success");
     } catch (error) {
       console.error("Error sending email:", error);
       displayMessage("Failed to send email.", "submitApplication");
+      setSubmitMessageType("error");
     }finally {
       setLoadingState((prev) => ({ ...prev, submitApplication: false })); // Stop loading
     }
@@ -596,7 +601,8 @@ setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for G
   <button onClick={handleEmailSubmit} disabled={loadingState.submitApplication} className="btn btn-success">
     {loadingState.submitApplication ? <BtnLoader /> : "Submit Application"}
   </button>
-  {showMessage && messageType === 'submitApplication' && <p className="success-message">{message}</p>}
+  {showMessage && messageType === 'submitApplication' &&         <p className={submitMessageType === 'success' ? 'success-message' : 'error-message'}>
+  {message}</p>}
 </div>
     {/* Place the modal here */}
     <div
