@@ -131,11 +131,11 @@ const InputForm = () => {
   };
 
 
-
+// Handle form submission for Submit Application color green and red
   const [message, setMessage] = useState('');
   const [messageType, setMessageType] = useState('');
   const [submitMessage, setSubmitMessage] = useState('');
-const [submitMessageType, setSubmitMessageType] = useState(''); // 'success' or 'error'
+  const [submitMessageType, setSubmitMessageType] = useState(''); // 'success' or 'error'
 
   const displayMessage = (msg, type) => {
     setMessage(msg);
@@ -145,11 +145,17 @@ const [submitMessageType, setSubmitMessageType] = useState(''); // 'success' or 
   };
   const [showMessage, setShowMessage] = useState(false);
 
+// validate email if correct dont send email if the type is not correct
+  const validateEmail = (email) => {
+    const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return emailRegex.test(email);
+  };
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
  // Check if contact information is filled
- if (!contactInfo.fullName || !contactInfo.contactNumber || !contactInfo.emailAddress || !contactInfo.nationality) {
+ if (!contactInfo.fullName || !contactInfo.contactNumber || !validateEmail(contactInfo.emailAddress) || !contactInfo.nationality) {
   displayMessage("Please fill out all required fields.", "getRates");
   return; // Don't proceed if contact info is missing
 }
@@ -225,7 +231,7 @@ setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for G
 
   const handleEmailSubmit = async () => {
       // Check if contact information is filled
-  if (!contactInfo.fullName || !contactInfo.contactNumber || !contactInfo.emailAddress || !contactInfo.nationality) {
+  if (!contactInfo.fullName || !contactInfo.contactNumber || !validateEmail(contactInfo.emailAddress) || !contactInfo.nationality) {
     displayMessage("Please fill out all required fields.", "getRates");
     return; // Don't proceed if contact info is missing
   }
@@ -289,14 +295,15 @@ setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for G
 
       <h1 className="text-center mb-2">
         I would like to know more about{" "}
-        <span style={{ color: "Green" }}>MY HEALTH</span> Family Discount
+        <span style={{ color: "#151577" }}>"MyHealth</span> Family Discount
       </h1>
-      <h5 className="text-center mb-2">My Health can accept applications from people aged 65 years or younger. To find out the best and discounted plan for <br></br>you and your family, you`ll need to provide some information:</h5>
+      <h5 className="text-center mb-2">"MyHealth can accept applications from people aged 65 years or younger. To find out the best and discounted plan for <br></br>you and your family, you`ll need to provide some information:</h5>
       <h4 className="text-left mt-4">
-        <span style={{ color: "Green" }}>Plans</span>
+        <span style={{ color: "#151577" }}>Plans</span>
       </h4>
       <div className="responsive-table">
-  <table className="table table-bordered table-striped mt-3 text-center plan">     <thead>
+  <table className="table table-bordered table-striped mt-3 text-center plan">     
+    <thead>
         <tr>
             <th>Modules</th>
             <th>Core</th>
@@ -353,7 +360,7 @@ setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for G
     </div>
       <h4 className="text-left mb-4">
         {" "}
-        <span style={{ color: "Green" }}>Contact Information</span>
+        <span style={{ color: "#151577" }}>Contact Information</span>
       </h4>
       <div className="row mb-3">
         <div className="col-md-3">
@@ -382,7 +389,7 @@ setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for G
       </div>
       <h4 className="text-left mb-4">
         {" "}
-        <span style={{ color: "Green" }}>Policy Information</span>
+        <span style={{ color: "#151577" }}>Policy Information</span>
       </h4>
       <form onSubmit={handleSubmit}>
         {/* <div className="d-flex justify-content-end mb-2">
@@ -442,7 +449,7 @@ setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for G
         ))}
       <h4 className="text-left mt-5">
         {" "}
-        <span style={{ color: "Green" }}>April (MyHEALTH)Indonesia</span>
+        <span style={{ color: "#151577" }}>April (MyHEALTH)Indonesia</span>
       </h4>
       <div className="row">
       <div className="col-md-3">
@@ -465,7 +472,7 @@ setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for G
 {response.length > 0 && (
   <div>
       <h4 className="text-left mt-4">        
-        <span style={{ color: "Green" }}>Plans</span>
+        <span style={{ color: "#151577" }}>Plans</span>
       </h4>
     <div className="table-responsive"> 
     <table className="table table-bordered table-striped plan">
@@ -486,7 +493,7 @@ setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for G
         <th>Premium</th>
         <th><div className="d-flex justify-content-between">
           <span>Plan & Room</span>
-        <span>Deductible</span></div></th>
+        <span>Co Ins.</span></div></th>
         <th>Premium</th>
         <th>Plan & Room</th>
         <th>Premium</th>
@@ -520,7 +527,7 @@ setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for G
               </div>
               {/* Premium: {rate.hs !== "N/A" ? rate.hs.toLocaleString() : "N/A"} */}
             </td>
-            <td>USD {rate.hs !== "N/A" ? rate.hs.toLocaleString() : "N/A"}</td>
+            <td className="premium">USD {rate.hs !== "N/A" ? rate.hs.toLocaleString() : "N/A"}</td>
             <td>
               <div className="d-flex gap-2">
                 <select className="form-select dropdown-font" value={clients[index].plans.op} onChange={(e) => handlePlanChange(index, "op", e.target.value)}>
@@ -537,7 +544,7 @@ setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for G
               </div>
               {/* Premium: {rate.op !== "N/A" ? rate.op.toLocaleString() : "N/A"} */}
             </td>
-            <td>USD {rate.op !== "N/A" ? rate.op.toLocaleString() : "N/A"}</td>
+            <td className="premium">USD {rate.op !== "N/A" ? rate.op.toLocaleString() : "N/A"}</td>
             <td>
               <select className="form-select dropdown-font" value={clients[index].plans.ma} onChange={(e) => handlePlanChange(index, "ma", e.target.value)}>
                 <option value="N/A">None</option>
@@ -548,7 +555,7 @@ setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for G
               </select>
               {/* Premium: {rate.ma !== "N/A" ? rate.ma.toLocaleString() : "N/A"} */}
             </td>
-            <td>USD {rate.ma !== "N/A" ? rate.ma.toLocaleString() : "N/A"}</td>
+            <td className="premium">USD {rate.ma !== "N/A" ? rate.ma.toLocaleString() : "N/A"}</td>
             <td>
               <select className="form-select dropdown-font" value={clients[index].plans.dn} onChange={(e) => handlePlanChange(index, "dn", e.target.value)}>
                 <option value="N/A">None</option>
@@ -559,8 +566,8 @@ setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for G
               </select>
               {/* Premium: {rate.dn !== "N/A" ? rate.dn.toLocaleString() : "N/A"} */}
             </td>
-            <td>USD {rate.dn !== "N/A" ? rate.dn.toLocaleString() : "N/A"}</td>
-            <td>
+            <td className="premium">USD {rate.dn !== "N/A" ? rate.dn.toLocaleString() : "N/A"}</td>
+            <td className="premium">
               USD{" "}
               {["hs", "op", "ma", "dn"]
                 .map((key) =>
@@ -584,7 +591,7 @@ setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for G
 )}
 <div style={{ display: "flex", flexDirection: "column", alignItems: "center", margin: "20px", }}>
   <button onClick={handleSubmit} disabled={loadingState.getRates} className="btn btn-success">
-    {loadingState.getRates ? <BtnLoader /> : "Get Rates"}
+    {loadingState.getRates ? <BtnLoader /> : "Calculate"}
   </button>
   {showMessage && messageType === 'getRates' && <p className="error-message">{message}</p>}
 </div>
@@ -599,7 +606,7 @@ setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for G
 {/* Below the Submit Application button */}
 <div style={{ display: "flex", flexDirection: "column", alignItems: "center", margin: "20px" }}>
   <button onClick={handleEmailSubmit} disabled={loadingState.submitApplication} className="btn btn-success">
-    {loadingState.submitApplication ? <BtnLoader /> : "Submit Application"}
+    {loadingState.submitApplication ? <BtnLoader /> : "Talk to Sales"}
   </button>
   {showMessage && messageType === 'submitApplication' &&         <p className={submitMessageType === 'success' ? 'success-message' : 'error-message'}>
   {message}</p>}

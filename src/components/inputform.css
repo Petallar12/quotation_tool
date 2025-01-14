@@ -102,3 +102,9 @@
   padding: 0;       /* No padding */
   margin: 0;        /* No margin */
 }
+
+.premium{
+  font-size:12px;
+  text-align: center;
+  vertical-align: middle;
+}
