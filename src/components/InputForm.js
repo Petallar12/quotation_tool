@@ -31,13 +31,19 @@ const InputForm = () => {
       nationality: "Indonesia",
       country_of_residence: "Indonesia",      
       plans: {
-        hs: "Essential",
+        hs: "Essential",  
         hs_deductible: "Nil",
         op: "Essential",
         op_co_ins: "Nil",
         ma: "N/A",
         dn: "Essential",
       },
+      isValid: {
+        nameValid: true,
+        ageValid: true,
+        genderValid: true,
+        relationshipValid: true
+      }
     },
   ]);
   const [contactInfo, setContactInfo] = useState({
@@ -104,30 +110,35 @@ const InputForm = () => {
   const CLIENT_LIMIT = 10;
 
   const addClient = () => {
-    setClients([
-      ...clients,
-      {
+    const newClient = {
         name: "",
         age: "",
         gender: "",
         payment_frequency: "Annually",
         relationship: "Dependent",
-        length:"",
+        length: "",
         area_of_coverage: contactInfo.area_of_coverage,
         currency: "USD",
         nationality: "Indonesia",
         country_of_residence: "Indonesia",
         plans: {
-          hs: "Essential",
-          hs_deductible: "Nil",
-          op: "Essential",
-          op_co_ins: "Nil",
-          ma: "N/A",
-          dn: "Essential",
+            hs: "Essential",
+            hs_deductible: "Nil",
+            op: "Essential",
+            op_co_ins: "Nil",
+            ma: "N/A",
+            dn: "Essential",
         },
-      },
-    ]);
-  };
+        isValid: {
+            nameValid: true,
+            ageValid: true,
+            genderValid: true,
+            relationshipValid: true
+        }
+    };
+    setClients([...clients, newClient]);
+};
+
 
   const removeClient = (index) => {
     setClients((prevClients) => prevClients.filter((_, i) => i !== index));
@@ -155,11 +166,67 @@ const InputForm = () => {
     return emailRegex.test(email);
   };
  
-
+  // track the validity of the form (if empty make the input red)// --------------------------eto ung para sa mag rered ang field pag blank sa form----------------
+  const [isValid, setIsValid] = useState({
+    fullNameValid: true,
+    contactNumberValid: true,
+    nationalityValid: true,
+    emailAddressValid: true,
+    clientNameValid: true,
+    clientAgeValid: true,
+    clientGenderValid: true
+  });
 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+// --------------------------eto ung para sa mag rered ang field pag blank sa form----------------
+let formIsValid = true;
+
+      // Validate contact information
+      const isFullNameValid = contactInfo.fullName.trim() !== '';
+      const isContactNumberValid = contactInfo.contactNumber.trim() !== '';
+      const isNationalityValid = contactInfo.nationality.trim() !== '';
+      const isEmailAddressValid = validateEmail(contactInfo.emailAddress);
+  
+      // Update state for contact info validation
+      setIsValid(prevState => ({
+          ...prevState,
+          fullNameValid: isFullNameValid,
+          contactNumberValid: isContactNumberValid,
+          nationalityValid: isNationalityValid,
+          emailAddressValid: isEmailAddressValid
+      }));
+  
+      // Validate each client and update their validation state
+      const updatedClients = clients.map(client => ({
+          ...client,
+          isValid: {
+              nameValid: client.name.trim() !== '',
+              ageValid: client.age.trim() !== '',
+              genderValid: client.gender !== '' && client.gender !== 'Select',
+              relationshipValid: client.relationship !== '' && client.relationship !== 'Select'
+          }
+      }));
+  
+      const allClientsValid = updatedClients.every(client =>
+          Object.values(client.isValid).every(Boolean)
+      );
+  
+      setClients(updatedClients);
+  
+      // Prevent form submission if any validation fails
+      if (!isFullNameValid || !isContactNumberValid || !isNationalityValid || !isEmailAddressValid || !allClientsValid) {
+          displayMessage("Please fill out all required fields correctly.", "getRates");
+          return;
+      }
+  
+      setLoadingState(prev => ({ ...prev, getRates: true }));
+  
+
+// --------------------------eto ung para sa mag rered ang field pag blank sa form nasa taas neto ----------------
+
+
  // Check if contact information is filled
  if (!contactInfo.fullName || !contactInfo.contactNumber || !validateEmail(contactInfo.emailAddress) || !contactInfo.nationality) {
   displayMessage("Please fill out all required fields.", "getRates");
@@ -371,16 +438,16 @@ setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for G
       <div className="row mb-3">
         <div className="col-md-3">
           <label className="field_name">Full Name:</label>
-          <input type="text"className="form-control"name="fullName" value={contactInfo.fullName} onChange={handleContactInfoChange}  required/>
+          <input type="text"className={`form-control ${!isValid.fullNameValid && 'invalid-field'}`}name="fullName" value={contactInfo.fullName} onChange={handleContactInfoChange}  required/>
         </div>
         <div className="col-md-2">
           <label className="field_name">Contact Number:</label>
-          <input type="text" className="form-control" name="contactNumber" value={contactInfo.contactNumber} onChange={handleContactInfoChange}required/>
+          <input type="text" className={`form-control ${!isValid.contactNumberValid && 'invalid-field'}`} name="contactNumber" value={contactInfo.contactNumber} onChange={handleContactInfoChange}required/>
         </div>
         
         <div className="col-md-3">
           <label className="field_name">Email Address:</label>
-          <input type="email" className={`form-control ${!isEmailValid && 'invalid-email'}`} name="emailAddress" value={contactInfo.emailAddress} onChange={handleContactInfoChange}required/>
+          <input type="email" className={`form-control ${!isValid.emailAddressValid && 'invalid-field'}`} name="emailAddress" value={contactInfo.emailAddress} onChange={handleContactInfoChange}required/>
         </div>
         <div className="col-md-2">
           <label className="field_name">Country of Residence:</label>
@@ -390,7 +457,7 @@ setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for G
         </div>
         <div className="col-md-2">
           <label className="field_name">Nationality:</label>
-          <input type="text" className="form-control" name="nationality" value={contactInfo.nationality}onChange={handleContactInfoChange} required/>
+          <input type="text"  className={`form-control ${!isValid.nationalityValid && 'invalid-field'}`} name="nationality" value={contactInfo.nationality}onChange={handleContactInfoChange} required/>
         </div>
       </div>
       <h4 className="text-left mb-4">
@@ -409,22 +476,41 @@ setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for G
           <div key={index} className="mb-3">
             <div>
               <div className="row">
-                <div className="col-md-3">
-                  <label className="field_name">Name:</label>
-                  <input type="text" className="form-control"name="name" value={client.name}onChange={(e) => handleClientChange(index, e)}required/>
-                </div>
-                <div className="col-md-1">
-                  <label className="field_name">Age:</label>
-                  <input type="number" className="form-control"name="age" value={client.age} onChange={(e) => handleClientChange(index, e)} required/>
-                </div>
-                <div className="col-md-3">
-                  <label className="field_name">Gender:</label>
-                  <select className="form-select dropdown-font" name="gender" value={client.gender}onChange={(e) => handleClientChange(index, e)}>
-                    <option value="">Select</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                  </select>
-                </div>
+              <div className="col-md-3">
+        <label className="field_name">Name:</label>
+        <input
+          type="text"
+          className={`form-control ${!client.isValid.nameValid && 'invalid-field'}`}
+          name="name"
+          value={client.name}
+          onChange={(e) => handleClientChange(index, e)}
+          required
+        />
+      </div>
+      <div className="col-md-1">
+        <label className="field_name">Age:</label>
+        <input
+          type="number"
+          className={`form-control ${!client.isValid.ageValid && 'invalid-field'}`}
+          name="age"
+          value={client.age}
+          onChange={(e) => handleClientChange(index, e)}
+          required
+        />
+      </div>
+      <div className="col-md-3">
+        <label className="field_name">Gender:</label>
+        <select
+          className={`form-select dropdown-font ${!client.isValid.genderValid && 'invalid-field'}`}
+          name="gender"
+          value={client.gender}
+          onChange={(e) => handleClientChange(index, e)}
+        >
+          <option value="">Select</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select>
+      </div>
                 <div className="col-md-3">
                   <label className="field_name">Relationship:</label>
                   <select className="form-select dropdown-font" name="relationship" value={client.relationship} onChange={(e) => handleClientChange(index, e)}required>
@@ -452,7 +538,8 @@ setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for G
           </div>
     
     </div></div>
-        ))}<div className="col-md-3">
+        ))}
+        <div className="col-md-3">
         <label className="field_name">Area of Coverage:</label>
                 <select className="form-select dropdown-font"name="area_of_coverage"value={contactInfo.area_of_coverage}onChange={handleContactInfoChange}>
                            <option value="Worldwide">Worldwide</option>
