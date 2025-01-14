@@ -77,10 +77,14 @@ const InputForm = () => {
     setClients(updatedClients);
   };
 
+  // mamumula ang field pag d valid ang email
+  const [isEmailValid, setIsEmailValid] = useState(true);
   const handleContactInfoChange = (e) => {
     const { name, value } = e.target;
     setContactInfo({ ...contactInfo, [name]: value });
-  
+    if (name === "emailAddress") {
+      setIsEmailValid(validateEmail(value));  // Validate email and update state -- mamumula ang field ng email pag d valid emailaddress ginamit
+    }
     if (name === "area_of_coverage") {
       // Update area_of_coverage for all clients when it is changed
       const updatedClients = clients.map((client) => ({
@@ -150,6 +154,8 @@ const InputForm = () => {
     const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return emailRegex.test(email);
   };
+ 
+
 
 
   const handleSubmit = async (e) => {
@@ -291,7 +297,7 @@ setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for G
 
     
     <div className="container my-4">
-    {showMessage && <p className="alert alert-info">{message}</p>}
+    {/* {showMessage && <p className="alert alert-info">{message}</p>} */}
 
       <h1 className="text-center mb-2">
         I would like to know more about{" "}
@@ -374,7 +380,7 @@ setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for G
         
         <div className="col-md-3">
           <label className="field_name">Email Address:</label>
-          <input type="email" className="form-control" name="emailAddress" value={contactInfo.emailAddress} onChange={handleContactInfoChange}required/>
+          <input type="email" className={`form-control ${!isEmailValid && 'invalid-email'}`} name="emailAddress" value={contactInfo.emailAddress} onChange={handleContactInfoChange}required/>
         </div>
         <div className="col-md-2">
           <label className="field_name">Country of Residence:</label>
