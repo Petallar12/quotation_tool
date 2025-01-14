@@ -112,3 +112,7 @@
 .invalid-email {
   border-color: red;
 }
+
+.invalid-field {
+  border: 1px solid red;
+}

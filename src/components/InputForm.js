@@ -468,7 +468,7 @@ setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for G
     <div>
     <h5 className="mt-3 col-md-12">
       Family Discount Percentage: 
-      {" "}<span style={{ color: getFamilyDiscountPercentage(clients.length) > 0 ? 'red' : 'black' }}>
+      {" "}<span style={{ color: getFamilyDiscountPercentage(clients.length) > 0 ? 'green' : 'black' }}>
       {getFamilyDiscountPercentage(clients.length)}%
     </span>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
