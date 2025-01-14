@@ -452,34 +452,34 @@ setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for G
           </div>
     
     </div></div>
-        ))}
-      <h4 className="text-left mt-5">
-        {" "}
-        <span style={{ color: "#151577" }}>April (MyHEALTH)Indonesia</span>
-      </h4>
-      <div className="row">
-      <div className="col-md-3">
-  <label className="field_name">Area of Coverage:</label>
-          <select className="form-select dropdown-font"name="area_of_coverage"value={contactInfo.area_of_coverage}onChange={handleContactInfoChange}>
-                     <option value="Worldwide">Worldwide</option>
-                      <option value="Worldwide excl USA">Worldwide excl USA</option>
-                      <option value="ASEAN Ex. SG">ASEAN Ex. SG</option>
-          </select>
-          </div>
-          </div>
-  <div>
-  <h5 className="mt-4 col-md-12">
-    Family Discount Percentage: 
-     {" "}{getFamilyDiscountPercentage(clients.length)}% &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-     Area of Coverage: {contactInfo.area_of_coverage}
-  </h5>
-</div>
+        ))}<div className="col-md-3">
+        <label className="field_name">Area of Coverage:</label>
+                <select className="form-select dropdown-font"name="area_of_coverage"value={contactInfo.area_of_coverage}onChange={handleContactInfoChange}>
+                           <option value="Worldwide">Worldwide</option>
+                            <option value="Worldwide excl USA">Worldwide excl USA</option>
+                            <option value="ASEAN Ex. SG">ASEAN Ex. SG</option>
+                </select>
+                </div>
+
+                <div>
+        <h4 className="text-left mt-4">        
+          <span style={{ color: "#151577" }}>April (MyHEALTH)Indonesia</span>
+        </h4>  
+    <div>
+    <h5 className="mt-3 col-md-12">
+      Family Discount Percentage: 
+      {" "}<span style={{ color: getFamilyDiscountPercentage(clients.length) > 0 ? 'red' : 'black' }}>
+      {getFamilyDiscountPercentage(clients.length)}%
+    </span>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      Area of Coverage: {contactInfo.area_of_coverage}
+    </h5>
+  </div>  
+  </div>   
+
 
 {response.length > 0 && (
-  <div>
-      <h4 className="text-left mt-4">        
-        <span style={{ color: "#151577" }}>Plans</span>
-      </h4>
+<div>
     <div className="table-responsive"> 
     <table className="table table-bordered table-striped plan">
       <thead>
