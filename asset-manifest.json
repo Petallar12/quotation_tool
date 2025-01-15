@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/quotation_tool/static/css/main.7704b5ba.css",
-    "main.js": "/quotation_tool/static/js/main.48b11089.js",
+    "main.css": "/quotation_tool/static/css/main.a1a91fa4.css",
+    "main.js": "/quotation_tool/static/js/main.904ff121.js",
     "static/js/453.a4a5f1d1.chunk.js": "/quotation_tool/static/js/453.a4a5f1d1.chunk.js",
     "static/media/fa-solid-900.ttf": "/quotation_tool/static/media/fa-solid-900.ad1782c70927ebc5bc87.ttf",
     "static/media/fa-brands-400.ttf": "/quotation_tool/static/media/fa-brands-400.26b80c8830bebf340211.ttf",
@@ -12,12 +12,12 @@
     "static/media/fa-v4compatibility.ttf": "/quotation_tool/static/media/fa-v4compatibility.fa86b3c85e77abbd2ebd.ttf",
     "static/media/fa-v4compatibility.woff2": "/quotation_tool/static/media/fa-v4compatibility.c3ea317a0f10f201597f.woff2",
     "index.html": "/quotation_tool/index.html",
-    "main.7704b5ba.css.map": "/quotation_tool/static/css/main.7704b5ba.css.map",
-    "main.48b11089.js.map": "/quotation_tool/static/js/main.48b11089.js.map",
+    "main.a1a91fa4.css.map": "/quotation_tool/static/css/main.a1a91fa4.css.map",
+    "main.904ff121.js.map": "/quotation_tool/static/js/main.904ff121.js.map",
     "453.a4a5f1d1.chunk.js.map": "/quotation_tool/static/js/453.a4a5f1d1.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.7704b5ba.css",
-    "static/js/main.48b11089.js"
+    "static/css/main.a1a91fa4.css",
+    "static/js/main.904ff121.js"
   ]
 }
