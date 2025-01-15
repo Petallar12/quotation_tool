@@ -116,3 +116,12 @@
 .invalid-field {
   border: 1px solid red;
 }
+
+/* Enhanced button with hover effect */
+.enhanced-button {
+  transition: transform 0.3s ease; /* Smooth transform over 300ms */
+}
+
+.enhanced-button:hover {
+  transform: scale(1.15); /* Enlarge the button to 105% of its original size */
+}

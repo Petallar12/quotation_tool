@@ -683,7 +683,7 @@ setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for G
   </div><br/></div>
 )}
 <div style={{ display: "flex", flexDirection: "column", alignItems: "center", margin: "20px", }}>
-  <button onClick={handleSubmit} disabled={loadingState.getRates} className="btn btn-success">
+  <button onClick={handleSubmit} disabled={loadingState.getRates} className="btn btn-success enhanced-button">
     {loadingState.getRates ? <BtnLoader /> : "Calculate"}
   </button>
   {showMessage && messageType === 'getRates' && <p className="error-message">{message}</p>}
@@ -691,14 +691,14 @@ setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for G
 
       </form>
             <p className="text-center mt-4" style={{ fontSize: '12px' }}>
-              By clicking on Submit Application you agree that your data may be used by Medishure to contact you by<br></br>phone or email your insurance application. Find more information on the processing of your<br></br> data in our{" "}
+              By clicking on Talk to Sales you agree that your data may be used by Medishure to contact you by<br></br>phone or email your insurance application. Find more information on the processing of your<br></br> data in our{" "}
   <span style={{ color: "Red", cursor: "pointer" }} data-bs-toggle="modal" data-bs-target="#personalDataPolicyModal">
     Personal Data Policy
   </span>.</p>
 
 {/* Below the Submit Application button */}
 <div style={{ display: "flex", flexDirection: "column", alignItems: "center", margin: "20px" }}>
-  <button onClick={handleEmailSubmit} disabled={loadingState.submitApplication} className="btn btn-success">
+  <button onClick={handleEmailSubmit} disabled={loadingState.submitApplication} className="btn btn-success enhanced-button">
     {loadingState.submitApplication ? <BtnLoader /> : "Talk to Sales"}
   </button>
   {showMessage && messageType === 'submitApplication' &&         <p className={submitMessageType === 'success' ? 'success-message' : 'error-message'}>
