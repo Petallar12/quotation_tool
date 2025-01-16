@@ -421,7 +421,7 @@ setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for G
             <td>....</td>
         </tr>
         <tr>
-            <td>24/7 Evacuation,repatriation and assistance services</td>
+            <td>24/7 Evacuation, repatriation and assistance services</td>
             <td>Included up to $1,000,000</td>
             <td>Included up to $1,000,000</td>
             <td>Included up to $1,000,000</td>
@@ -557,7 +557,7 @@ setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for G
 
                 <div>
         <h4 className="text-left mt-4">        
-          <span style={{ color: "#151577" }}>April (MyHEALTH)Indonesia</span>
+          <span style={{ color: "#151577" }}>April (MyHEALTH) Indonesia</span>
         </h4>  
     <div>
     <h5 className="mt-3 col-md-12">
@@ -698,7 +698,7 @@ setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for G
 
       </form>
             <p className="text-center mt-4" style={{ fontSize: '12px' }}>
-              By clicking on Talk to Sales you agree that your data may be used by Medishure to contact you by<br></br>phone or email your insurance application. Find more information on the processing of your<br></br> data in our{" "}
+              By clicking on <b>Talk to Sales</b> you agree that your data may be used by Medishure to contact you by<br></br>phone or email your insurance application. Find more information on the processing of your<br></br> data in our{" "}
   <span style={{ color: "Red", cursor: "pointer" }} data-bs-toggle="modal" data-bs-target="#personalDataPolicyModal">
     Personal Data Policy
   </span>.</p>
@@ -736,11 +736,12 @@ setLoadingState((prev) => ({ ...prev, getRates: true })); // Start loading for G
               <p>
                 <b>Personal Data Privacy Policy</b><br/>
                 <b>Effective Date:</b> December 15, 2024<br/>
+                <br/>
                 <b>1. Introduction<br/></b>
                 <span style={{ fontSize: '14px' }}>Welcome to our April quote tool. At Luke Medikal International, we respect and value your privacy. This Personal Data Privacy Policy outlines how we collect, use, store, and protect your personal information when you use our quote form available at lukemedikal.co.id.
                 By using our quotation form, you consent to the terms of this policy.<br/></span>
                 <hr/><br/>
-                <b>2. Inxollect</b><br/>
+                <b>2. Data Collection</b><br/>
                 <span style={{ fontSize: '14px' }}>When you submit a quote request through our form, we may collect the following Personal data:<br/>
                 &nbsp;•	Full Name<br/>
                 &nbsp;•	Contact Information (e.g., email address, phone number)<br/>
